@@ -39,6 +39,9 @@
             "path": "node_modules/cz-customizable"
         }
     },
+    "dependencies": {
+        "alphanumeric-encoder": "^1.1.0"
+    },
     "devDependencies": {
         "@semantic-release/changelog": "^6.0.1",
         "@semantic-release/git": "^10.0.1",
