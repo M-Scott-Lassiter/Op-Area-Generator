@@ -8,8 +8,8 @@
         "oparea",
         "operating area"
     ],
-    "homepage": "https://github.com/M-Scott-Lassiter/Op-Area-Generator#readme",
-    "bugs": "https://github.com/M-Scott-Lassiter/Op-Area-Generator/issues",
+    "homepage": "https://github.com/M-Scott-Lassiter/OpArea#readme",
+    "bugs": "https://github.com/M-Scott-Lassiter/OpArea/issues",
     "license": "MIT",
     "author": "M. Scott Lassiter",
     "files": [
@@ -21,7 +21,7 @@
     "main": "./src/index.js",
     "repository": {
         "type": "git",
-        "url": "https://github.com/M-Scott-Lassiter/Op-Area-Generator.git"
+        "url": "https://github.com/M-Scott-Lassiter/OpArea.git"
     },
     "scripts": {
         "build": "npm run lint && npm run test && npm run docs && npm run tableofcontents && npm run format",

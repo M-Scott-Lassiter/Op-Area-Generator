@@ -6,7 +6,7 @@ I take security seriously and am committed to working with the open source commu
 
 ## Disclosure
 
-If you believe you have found a security vulnerability in this repository, please [contact me](https://github.com/M-Scott-Lassiter/Op-Area-Generator#envelope-contact) directly to report it.
+If you believe you have found a security vulnerability in this repository, please [contact me](https://github.com/M-Scott-Lassiter/OpArea#envelope-contact) directly to report it.
 
 **Do not report security vulnerabilities through public methods such as issues, discussions, or pull requests.**
 
@@ -24,4 +24,4 @@ This information will help me triage your report more quickly.
 
 ## Response
 
-Once the issue has been fixed, the [CI/CD process](https://github.com/M-Scott-Lassiter/Op-Area-Generator/blob/main/CONTRIBUTING.md#continuous-integrationcontinuous-deployment-setup) will trigger a new build. Once that build releases, I will make a [security advisory](https://github.com/M-Scott-Lassiter/Op-Area-Generator/security/advisories).
+Once the issue has been fixed, the [CI/CD process](https://github.com/M-Scott-Lassiter/OpArea/blob/main/CONTRIBUTING.md#continuous-integrationcontinuous-deployment-setup) will trigger a new build. Once that build releases, I will make a [security advisory](https://github.com/M-Scott-Lassiter/OpArea/security/advisories).

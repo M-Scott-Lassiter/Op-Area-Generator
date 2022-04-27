@@ -2,21 +2,21 @@
 
 # Op-Area-Generator
 
-[![Tests](https://github.com/M-Scott-Lassiter/Op-Area-Generator/actions/workflows/test.yml/badge.svg)](https://github.com/M-Scott-Lassiter/Op-Area-Generator/actions/workflows/test.yml)
-[![Build](https://github.com/M-Scott-Lassiter/Op-Area-Generator/actions/workflows/publish.yml/badge.svg)](https://github.com/M-Scott-Lassiter/Op-Area-Generator/actions/workflows/publish.yml)
-[![codecov](https://codecov.io/github/M-Scott-Lassiter/Op-Area-Generator/branch/main/graph/badge.svg?token=MLCXIHQJGA)](https://codecov.io/github/M-Scott-Lassiter/Op-Area-Generator)
-[![Dependency status](https://img.shields.io/librariesio/release/npm/op-area-generator)](https://www.npmjs.com/package/op-area-generator?activeTab=dependencies)
-![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/npm/op-area-generator)
-[![Open Issues](https://img.shields.io/github/issues/m-scott-lassiter/op-area-generator/bug)](https://github.com/M-Scott-Lassiter/Op-Area-Generator/labels/bug)
+[![Tests](https://github.com/M-Scott-Lassiter/OpArea/actions/workflows/test.yml/badge.svg)](https://github.com/M-Scott-Lassiter/OpArea/actions/workflows/test.yml)
+[![Build](https://github.com/M-Scott-Lassiter/OpArea/actions/workflows/publish.yml/badge.svg)](https://github.com/M-Scott-Lassiter/OpArea/actions/workflows/publish.yml)
+[![codecov](https://codecov.io/github/M-Scott-Lassiter/OpArea/branch/main/graph/badge.svg?token=MLCXIHQJGA)](https://codecov.io/github/M-Scott-Lassiter/OpArea)
+[![Dependency status](https://img.shields.io/librariesio/release/npm/OpArea)](https://www.npmjs.com/package/OpArea?activeTab=dependencies)
+![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/npm/oparea)
+[![Open Issues](https://img.shields.io/github/issues/m-scott-lassiter/op-area-generator/bug)](https://github.com/M-Scott-Lassiter/OpArea/labels/bug)
 
 [![Maintained](https://img.shields.io/badge/Maintained%3F-yes-brightgreen.svg)](#envelope-contact)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](/../../blob/main/CONTRIBUTING.md)
 
 ---
 
-[![NPM Version](https://img.shields.io/npm/v/op-area-generator)](https://www.npmjs.com/package/op-area-generator)
-![NPM Package Size](https://img.shields.io/bundlephobia/min/op-area-generator)
-[![License](https://img.shields.io/github/license/M-Scott-Lassiter/Op-Area-Generator)](https://github.com/M-Scott-Lassiter/Op-Area-Generator/blob/main/LICENSE)
+[![NPM Version](https://img.shields.io/npm/v/op-area-generator)](https://www.npmjs.com/package/oparea)
+![NPM Package Size](https://img.shields.io/bundlephobia/min/oparea)
+[![License](https://img.shields.io/github/license/M-Scott-Lassiter/Op-Area-Generator)](https://github.com/M-Scott-Lassiter/OpArea/blob/main/LICENSE)
 
 </div>
 
@@ -46,7 +46,7 @@
 
 ### Purpose
 
-`op-area-generator` can generate GEOJSON area definitions and subsequent operating assignments
+`oparea` can generate GEOJSON area definitions and subsequent operating assignments
 
 ### Install as an NPM Package
 
@@ -57,9 +57,9 @@ npm install op-area-generator
 ### Use in Javascript
 
 ```javascript
-const opAreaGenerator = require('op-area-generator')
+const OpArea = require('oparea')
 
-const oparea = new opAreaGenerator()
+const oparea = new OpArea()
 ```
 
 ---
@@ -85,9 +85,9 @@ Other Node versions and operating systems might support the library, but the tes
 
 ## License and Development
 
-`op-area-generator` and all other files in this repository are distributed as free and open-source software under the [MIT License](/../../blob/main/LICENSE), © 2022.
+`oparea` and all other files in this repository are distributed as free and open-source software under the [MIT License](/../../blob/main/LICENSE), © 2022.
 
-Both [contributions](/../../blob/main/CONTRIBUTING.md) and [bug reports](https://github.com/M-Scott-Lassiter/Op-Area-Generator/issues/new/choose) welcome.
+Both [contributions](/../../blob/main/CONTRIBUTING.md) and [bug reports](https://github.com/M-Scott-Lassiter/OpArea/issues/new/choose) welcome.
 
 Leave a :star2: if you find this project useful!
 

@@ -11,7 +11,7 @@
 
 </div>
 
-**Thank you for contributing to `op-area-generator`!**
+**Thank you for contributing to `OpArea`!**
 
 Before contributing, please take a moment to read through this document. This guide documents the standards, tooling, and processes that go into the CI/CD pipeline.
 
@@ -53,7 +53,7 @@ Please help keep this project open and inclusive. Refer to the [Code of Conduct]
 
 **Bug Reports**: Be as detailed as possible, and fill out all information requested in the [bug report template].
 
-_For security related issues, see the [security policy](https://github.com/M-Scott-Lassiter/Op-Area-Generator/security/policy)._
+_For security related issues, see the [security policy](https://github.com/M-Scott-Lassiter/OpArea/security/policy)._
 
 **Feature Request**: These are welcome, just take a moment to consider whether your idea fits within the scope and aims of this project. It is up to you to make your case of why the feature should get included. Be as detailed as possible, and fill out a [feature request].
 
@@ -61,7 +61,7 @@ _For security related issues, see the [security policy](https://github.com/M-Sco
 
 ### Improve Documentation
 
-Open a new issue [here](https://github.com/M-Scott-Lassiter/Op-Area-Generator/issues/new/choose).
+Open a new issue [here](https://github.com/M-Scott-Lassiter/OpArea/issues/new/choose).
 
 ### Submit a Pull Request
 
@@ -82,7 +82,7 @@ To submit a pull request,
 ### Local Installation
 
 ```
-git clone https://github.com/M-Scott-Lassiter/Op-Area-Generator.git
+git clone https://github.com/M-Scott-Lassiter/OpArea.git
 cd alphanumeric-encoder
 npm install # or `yarn install`
 ```
@@ -204,7 +204,7 @@ Optional. If used, must be one of the following supported scopes:
 -   `api`: Any documentation that helps developers or end users understand how to better employ a tool or feature
 -   `contributing`: Contributions to this guidance or the [Code of Conduct](/../../blob/main/CODE_OF_CONDUCT.md)
 -   `license`: Changes to terms or copyright status within the [license](/../../blob/main/LICENSE). _NOTE: Any wholesale change in license type MUST include a BREAKING CHANGE._
--   `readme`: Contributions to the main [README.md](https://github.com/M-Scott-Lassiter/Op-Area-Generator)
+-   `readme`: Contributions to the main [README.md](https://github.com/M-Scott-Lassiter/OpArea#README)
 -   `security`: Changes that address code related security issues or security policies
 
 #### Commit Body Format
