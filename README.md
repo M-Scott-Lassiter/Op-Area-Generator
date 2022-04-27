@@ -14,7 +14,7 @@
 
 ---
 
-[![NPM Version](https://img.shields.io/npm/v/alphanumeric-encoder)](https://www.npmjs.com/package/op-area-generator)
+[![NPM Version](https://img.shields.io/npm/v/op-area-generator)](https://www.npmjs.com/package/op-area-generator)
 ![NPM Package Size](https://img.shields.io/bundlephobia/min/op-area-generator)
 [![License](https://img.shields.io/github/license/M-Scott-Lassiter/Op-Area-Generator)](https://github.com/M-Scott-Lassiter/Op-Area-Generator/blob/main/LICENSE)
 
