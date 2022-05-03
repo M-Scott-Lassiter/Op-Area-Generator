@@ -40,7 +40,7 @@
         }
     },
     "dependencies": {
-        "alphanumeric-encoder": "^1.1.0"
+        "alphanumeric-encoder": "^1.5.0"
     },
     "devDependencies": {
         "@semantic-release/changelog": "^6.0.1",
