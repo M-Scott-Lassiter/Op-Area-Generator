@@ -43,7 +43,7 @@ module.exports = {
                 changelogFile: 'CHANGELOG.md'
             }
         ],
-        // '@semantic-release/npm', // Commented for now until ready to release v1.0.0
+        '@semantic-release/npm',
         ['@semantic-release/github'],
         [
             '@semantic-release/git',
