@@ -1,6 +1,6 @@
 {
     "name": "op-area-generator",
-    "version": "0.0.1-development",
+    "version": "1.0.0-development",
     "description": "Generate GEOJSON area definitions and operating assignments",
     "keywords": [
         "grid",
