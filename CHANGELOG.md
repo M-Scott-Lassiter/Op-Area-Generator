@@ -1,14 +1,12 @@
 ### [1.0.1](https://github.com/M-Scott-Lassiter/OpArea/compare/v1.0.0...v1.0.1) (2022-05-03)
 
-
 ### :lady_beetle: Bug Fixes
 
-* configure package.json for initial publishing ([0a14c3d](https://github.com/M-Scott-Lassiter/OpArea/commit/0a14c3d78a88d38c36dcda33803e7044500b297b))
-
+-   configure package.json for initial publishing ([0a14c3d](https://github.com/M-Scott-Lassiter/OpArea/commit/0a14c3d78a88d38c36dcda33803e7044500b297b))
 
 ### :dart: Test Changes
 
-* add initial placeholder test file ([f430845](https://github.com/M-Scott-Lassiter/OpArea/commit/f43084553e3d713c44218df8728b29687976b4b0))
+-   add initial placeholder test file ([f430845](https://github.com/M-Scott-Lassiter/OpArea/commit/f43084553e3d713c44218df8728b29687976b4b0))
 
 ## 1.0.0 (2022-05-03)
 
