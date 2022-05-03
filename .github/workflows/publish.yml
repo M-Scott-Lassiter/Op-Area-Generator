@@ -18,8 +18,8 @@ jobs:
           node-version: '16.x'
       - name: Clean Install
         run: npm ci
-      - name: Build
-        run: npm run build
+      # - name: Build
+      #   run: npm run build
       - name: Release new version to NPM
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
