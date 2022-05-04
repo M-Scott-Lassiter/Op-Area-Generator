@@ -1,0 +1,36 @@
+{
+    "docdash": {
+        "static": true,
+        "sort": true,
+        "search": true,
+        "collapse": true,
+        "typedefs": true,
+        "removeQuotes": "none",
+        "scripts": [],
+        "menu": {
+            "Github repo": {
+                "href": "https://github.com/M-Scott-Lassiter/OpArea",
+                "target": "_blank",
+                "class": "menu-item",
+                "id": "repository"
+            }
+        }
+    },
+    "opts": {
+        "access": "all",
+        "readme": "README.md",
+        "recurse": true,
+        "template": "node_modules/docdash"
+    },
+    "plugins": [],
+    "templates": {
+        "default": {
+            "includeDate": false,
+            "useLongnameInNav": true
+        }
+    },
+    "source": {
+        "include": ["./src"],
+        "includePattern": ".+.js?$"
+    }
+}
