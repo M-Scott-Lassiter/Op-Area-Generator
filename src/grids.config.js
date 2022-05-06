@@ -49,7 +49,7 @@ function alias(aliasName, refersToNames) {
 /**
  * Validates an alias object for correct formatting.
  *
- * @see GridConfig.Alias
+ * @see GridConfig.Alias for validity requirements.
  * @param {GridConfig.Alias} aliasToCheck An alias object to check for validity
  * @returns {boolean} True if a valid alias object
  */
@@ -83,6 +83,45 @@ function validAlias(aliasToCheck) {
     // Check for duplicate entries in the refersTo
     const processedArray = [...new Set(aliasToCheck.refersTo)]
     if (processedArray.length !== aliasToCheck.refersTo.length) {
+        return false
+    }
+
+    // All validations passed, return true
+    return true
+}
+
+/**
+ * Validates an aliasCollection object for correct formatting.
+ *
+ * @see GridConfig.AliasCollection for validity requirements.
+ * @param {GridConfig.Alias|GridConfig.AliasCollection} aliasCollectionToCheck An alias object to check for validity
+ * @returns {boolean} True if a valid alias object
+ */
+function validAliasCollection(aliasCollectionToCheck) {
+    // Normalize the input to an array so it can get looped through
+    let processedArray = []
+    if (Array.isArray(aliasCollectionToCheck)) {
+        // Already in an array
+        processedArray = [...aliasCollectionToCheck]
+    } else {
+        processedArray = [aliasCollectionToCheck]
+    }
+
+    // Loop through each provided alias and check it for validity. If any are invalid on their own,
+    //      the whole aliasCollection is invalid. Collect the aliases while looping.
+    const aliasList = []
+    for (let i = 0; i < processedArray.length; i++) {
+        if (!validAlias(processedArray[i])) {
+            return false
+        }
+        aliasList.push(processedArray[i].alias)
+        console.log(processedArray.length, processedArray[i])
+    }
+
+    // Use the set operator to get unique aliases. If this new array is not the same length as the
+    //      old array, then there was a duplicate alias key, and this collection is invalid.
+    const uniqueAliases = [...new Set(aliasList)]
+    if (uniqueAliases.length !== aliasList.length) {
         return false
     }
 
@@ -177,3 +216,4 @@ exports.aliasCollection = aliasCollection
 exports.geographicBoundaries = geographicBoundaries
 exports.geographicConfig = geographicConfig
 exports.validAlias = validAlias
+exports.validAliasCollection = validAliasCollection
