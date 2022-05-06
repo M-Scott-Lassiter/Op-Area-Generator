@@ -47,6 +47,50 @@ function alias(aliasName, refersToNames) {
 }
 
 /**
+ * Validates an alias object for correct formatting.
+ *
+ * @see GridConfig.Alias
+ * @param {GridConfig.Alias} aliasToCheck An alias object to check for validity
+ * @returns {boolean} True if a valid alias object
+ */
+function validAlias(aliasToCheck) {
+    // Only objects will validate
+    if (typeof aliasToCheck !== 'object' || aliasToCheck === null) {
+        return false
+    }
+
+    // Only two keys may exist: 'alias' and 'refersTo'
+    if (
+        !(
+            'alias' in aliasToCheck &&
+            'refersTo' in aliasToCheck &&
+            Object.keys(aliasToCheck).length === 2
+        )
+    ) {
+        return false
+    }
+
+    // Check for invalid alias values
+    if (typeof aliasToCheck.alias !== 'string' || aliasToCheck.alias === '') {
+        return false
+    }
+
+    // Check for valid refersTo values
+    if (!Array.isArray(aliasToCheck.refersTo)) {
+        return false
+    }
+
+    // Check for duplicate entries in the refersTo
+    const processedArray = [...new Set(aliasToCheck.refersTo)]
+    if (processedArray.length !== aliasToCheck.refersTo.length) {
+        return false
+    }
+
+    // All validations passed, return true
+    return true
+}
+
+/**
  * Combines an alias or alias collection into a combined alias collection.
  *
  * @param {GridConfig.Alias|GridConfig.Alias[]|GridConfig.AliasCollection|GridConfig.AliasCollection[]} aliases An array of aliases or alias collections.
@@ -132,3 +176,4 @@ exports.alias = alias
 exports.aliasCollection = aliasCollection
 exports.geographicBoundaries = geographicBoundaries
 exports.geographicConfig = geographicConfig
+exports.validAlias = validAlias

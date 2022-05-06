@@ -51,11 +51,12 @@
 
 /**
  * Used to define a code word (or alias) that corresponds to a particular grid square or range of grid squares.
+ * For validity, this object may only have these two properties and must follow the rules described below.
  *
  * @typedef {object} GridConfig.Alias
  * @memberOf GridConfig
- * @property {string} alias The grid square id (e.g. <code>'A5'</code>)
- * @property {string[]} refersTo An array of unique strings corresponding to an alias for this grid square
+ * @property {string} alias The alias id (e.g. <code>'MANTA'</code>). Must be any non-empty string.
+ * @property {string[]} refersTo An array strings corresponding to grid IDs or other aliases. May be an empty array. Values must be unique.
  * @example
  * const alias1 = { alias: 'MANTA', refersTo: ['A5'] }
  * const alias2 = { alias: 'COFFEE', refersTo: ['BLACK', 'ALIEN', 'G22'] }
