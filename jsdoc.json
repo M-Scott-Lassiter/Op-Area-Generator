@@ -25,12 +25,13 @@
     "plugins": [],
     "templates": {
         "default": {
-            "includeDate": false,
+            "includeDate": true,
             "useLongnameInNav": true
         }
     },
     "source": {
         "include": ["./src"],
-        "includePattern": ".+.js?$"
-    }
+        "includePattern": ".+\\.js$"
+    },
+    "wrap": true
 }
