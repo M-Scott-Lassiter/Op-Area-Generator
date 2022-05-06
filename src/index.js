@@ -1,4 +1,7 @@
-const AlphanumericEncoder = require('alphanumeric-encoder')
+// @ts-check
+const config = require('./grids.config')
+const geographic = require('./grids.geographic')
 
-const encoder = new AlphanumericEncoder()
-encoder.dictionary = 'ABC123'
+const grids = { geographic, config }
+
+exports.grids = grids
