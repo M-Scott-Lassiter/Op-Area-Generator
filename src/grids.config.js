@@ -115,7 +115,6 @@ function validAliasCollection(aliasCollectionToCheck) {
             return false
         }
         aliasList.push(processedArray[i].alias)
-        console.log(processedArray.length, processedArray[i])
     }
 
     // Use the set operator to get unique aliases. If this new array is not the same length as the
