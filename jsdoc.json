@@ -3,7 +3,7 @@
         "static": true,
         "sort": true,
         "search": true,
-        "collapse": true,
+        "collapse": false,
         "typedefs": true,
         "removeQuotes": "none",
         "scripts": [],
