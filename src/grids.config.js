@@ -7,6 +7,36 @@
  */
 
 /**
+ * Takes any input or array of inputs and returns an array.
+ * @private
+ * @ignore
+ * @param {any|any[]} arrayOrValue Value or array to convert to array
+ * @returns {any[]} Consolidated array
+ */
+function toArray(arrayOrValue) {
+    if (Array.isArray(arrayOrValue)) {
+        // Already in an array
+        return arrayOrValue
+    }
+    return [arrayOrValue]
+}
+
+/**
+ * Takes an array and checks if it has only unique values
+ * @private
+ * @ignore
+ * @param {any[]} arrayToTest Array of any values
+ * @returns {boolean} True if array contains only unique values
+ */
+function uniqueArray(arrayToTest) {
+    const uniqueAliases = [...new Set(arrayToTest)]
+    if (uniqueAliases.length === arrayToTest.length) {
+        return true
+    }
+    return false
+}
+
+/**
  * Used to create a properly validated and formatted alias object.
  *
  * @param {string} aliasName ID corresponding to a grid square. (e.g. 'A5', 'G22')
@@ -81,8 +111,7 @@ function validAlias(aliasToCheck) {
     }
 
     // Check for duplicate entries in the refersTo
-    const processedArray = [...new Set(aliasToCheck.refersTo)]
-    if (processedArray.length !== aliasToCheck.refersTo.length) {
+    if (!uniqueArray(aliasToCheck.refersTo)) {
         return false
     }
 
@@ -99,13 +128,7 @@ function validAlias(aliasToCheck) {
  */
 function validAliasCollection(aliasCollectionToCheck) {
     // Normalize the input to an array so it can get looped through
-    let processedArray = []
-    if (Array.isArray(aliasCollectionToCheck)) {
-        // Already in an array
-        processedArray = [...aliasCollectionToCheck]
-    } else {
-        processedArray = [aliasCollectionToCheck]
-    }
+    const processedArray = toArray(aliasCollectionToCheck)
 
     // Loop through each provided alias and check it for validity. If any are invalid on their own,
     //      the whole aliasCollection is invalid. Collect the aliases while looping.
@@ -119,8 +142,7 @@ function validAliasCollection(aliasCollectionToCheck) {
 
     // Use the set operator to get unique aliases. If this new array is not the same length as the
     //      old array, then there was a duplicate alias key, and this collection is invalid.
-    const uniqueAliases = [...new Set(aliasList)]
-    if (uniqueAliases.length !== aliasList.length) {
+    if (!uniqueArray(aliasList)) {
         return false
     }
 
@@ -131,7 +153,7 @@ function validAliasCollection(aliasCollectionToCheck) {
 /**
  * Combines an alias or alias collection into a combined alias collection.
  *
- * @param {GridConfig.Alias|GridConfig.Alias[]|GridConfig.AliasCollection|GridConfig.AliasCollection[]} aliases An array of aliases or alias collections.
+ * @param {GridConfig.Alias|GridConfig.Alias[]|GridConfig.AliasCollection|GridConfig.AliasCollection[]} aliasesObjects An array of aliases or alias collections.
  * @returns {GridConfig.AliasCollection} Properly formatted alias object
  * @see {@link GridConfig.Alias}
  * @example
@@ -156,8 +178,68 @@ function validAliasCollection(aliasCollectionToCheck) {
  *      //  { alias: 'COFFEE', refersTo: ['BLACK', 'ALIEN', 'G22', 'G23'] },
  *      //  { alias: 'RAY', refersTo: ['COFFEE', 'MANTA', 'A6', 'B5', 'B6'] }]
  */
-function aliasCollection(aliases) {
-    return [aliases]
+function aliasCollection(aliasesObjects) {
+    let safeArray = toArray(aliasesObjects)
+
+    // Test for invalid aliases or alias collections should throw an error. Nothing can salvage that.
+    //      But first, we have to completely destructure the input and make sure it is in the right
+    //      format for the rest of the code to work.
+    if (safeArray.length === 1) {
+        if (Array.isArray(safeArray[0])) {
+            // Only one argument was passed, and it looks like it might be an aliasCollection
+            if (!validAliasCollection(safeArray[0])) {
+                throw new Error('Argument contains an invalid alias collection.')
+            }
+            // eslint-disable-next-line prefer-destructuring
+            safeArray = safeArray[0] // Puts it in the right format for the mapping code
+        } else if (!validAlias(safeArray[0])) {
+            // It wasn't an aliasCollection, so see if it was a valid alias passed in an array
+            throw new Error('Argument contains an invalid alias.')
+        }
+    } else {
+        // It was passed an array of multiple objects.
+        const destructuredArray = []
+        safeArray.forEach((aliasObject) => {
+            if (Array.isArray(aliasObject)) {
+                // aliasCollection contained, add each element
+                for (let i = 0; i < aliasObject.length; i++) {
+                    destructuredArray.push(aliasObject[i])
+                }
+            } else {
+                destructuredArray.push(aliasObject) // Element was a single alias only
+            }
+        })
+        // Check each of these new elements for validity before calling them safe
+        destructuredArray.forEach((element) => {
+            if (!validAlias(element)) {
+                throw new Error('Argument contains an invalid alias2.')
+            }
+        })
+        safeArray = destructuredArray
+    }
+
+    // Now that all aliases are individually known valid, get a consolidated list of the alias keys
+
+    // Loop through the aliases and pull out only the unique values
+    const aliasMap = new Map()
+    for (let i = 0; i < safeArray.length; i++) {
+        const currentAliasSet = aliasMap.get(safeArray[i].alias)
+        if (currentAliasSet) {
+            for (let j = 0; j < safeArray[i].refersTo.length; j++) {
+                currentAliasSet.add(safeArray[i].refersTo[j])
+            }
+        } else {
+            aliasMap.set(safeArray[i].alias, new Set(safeArray[i].refersTo))
+        }
+    }
+
+    // Take the map and format it into an array of objects to return
+    const outputArray = []
+    aliasMap.forEach((values, keys) => {
+        outputArray.push({ alias: keys, refersTo: [...values] })
+    })
+
+    return outputArray
 }
 
 /**
