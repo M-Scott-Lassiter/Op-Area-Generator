@@ -18,28 +18,28 @@ const validAliasCollection = [
 
 describe('Function `validAlias` Testing', () => {
     test.each(validAliases)('Alias %p validates correctly', (input) => {
-        expect(oparea.grids.config.validAlias(input)).toBeTruthy()
+        expect(oparea.grids.validation.validAlias(input)).toBeTruthy()
     })
 
     test('Missing alias property returns false', () => {
         const alias = { refersTo: ['A5'] }
-        expect(oparea.grids.config.validAlias(alias)).toBeFalsy()
+        expect(oparea.grids.validation.validAlias(alias)).toBeFalsy()
     })
 
     test('Missing refersTo property returns false', () => {
         const alias = { alias: 'MANTA' }
-        expect(oparea.grids.config.validAlias(alias)).toBeFalsy()
+        expect(oparea.grids.validation.validAlias(alias)).toBeFalsy()
     })
 
     test('Extra properties returns false', () => {
         const alias = { alias: 'MANTA', refersTo: ['A5'], extraProp: true }
-        expect(oparea.grids.config.validAlias(alias)).toBeFalsy()
+        expect(oparea.grids.validation.validAlias(alias)).toBeFalsy()
     })
 
     test.each([null, undefined, '', 'string', 2, [1]])(
         'Not an object (%p) returns false',
         (input) => {
-            expect(oparea.grids.config.validAlias(input)).toBeFalsy()
+            expect(oparea.grids.validation.validAlias(input)).toBeFalsy()
         }
     )
 
@@ -47,7 +47,7 @@ describe('Function `validAlias` Testing', () => {
         'Invalid alias value (%p) returns false',
         (input) => {
             const aliasToTest = { alias: input, refersTo: ['A5'] }
-            expect(oparea.grids.config.validAlias(aliasToTest)).toBeFalsy()
+            expect(oparea.grids.validation.validAlias(aliasToTest)).toBeFalsy()
         }
     )
 
@@ -55,13 +55,13 @@ describe('Function `validAlias` Testing', () => {
         'Invalid refersTo value (%p) returns false',
         (input) => {
             const aliasToTest = { alias: 'GOODNAME', refersTo: input }
-            expect(oparea.grids.config.validAlias(aliasToTest)).toBeFalsy()
+            expect(oparea.grids.validation.validAlias(aliasToTest)).toBeFalsy()
         }
     )
 
     test('Duplicate refersTo returns false', () => {
         const alias = { alias: 'COFFEE', refersTo: ['BLACK', 'ALIEN', 'BLACK', 'G22', 'G23'] }
-        expect(oparea.grids.config.validAlias(alias)).toBeFalsy()
+        expect(oparea.grids.validation.validAlias(alias)).toBeFalsy()
     })
 })
 
@@ -69,21 +69,21 @@ describe('Function `validAliasCollection` Testing', () => {
     test.each([null, [1], { a: 'invalid' }])(
         'Passing a known invalid alias or aliasCollection should return false',
         (input) => {
-            expect(oparea.grids.config.validAliasCollection(input)).toBeFalsy()
+            expect(oparea.grids.validation.validAliasCollection(input)).toBeFalsy()
         }
     )
 
     test.each(validAliases)('Passing known valid aliases should return true', (input) => {
-        expect(oparea.grids.config.validAliasCollection(input)).toBeTruthy()
+        expect(oparea.grids.validation.validAliasCollection(input)).toBeTruthy()
     })
 
     test('Passing known valid aliasCollection should return true', () => {
-        expect(oparea.grids.config.validAliasCollection([alias1, alias4, alias7])).toBeTruthy()
-        expect(oparea.grids.config.validAliasCollection(validAliasCollection)).toBeTruthy()
+        expect(oparea.grids.validation.validAliasCollection([alias1, alias4, alias7])).toBeTruthy()
+        expect(oparea.grids.validation.validAliasCollection(validAliasCollection)).toBeTruthy()
     })
 
     test('Passing aliasCollection with duplicated alias should return false', () => {
-        expect(oparea.grids.config.validAliasCollection(validAliases)).toBeFalsy()
+        expect(oparea.grids.validation.validAliasCollection(validAliases)).toBeFalsy()
     })
 })
 
@@ -123,7 +123,7 @@ describe('Function `alias` Testing', () => {
     })
 })
 
-describe('Initial `aliasCollection` Testing', () => {
+describe('Function `aliasCollection` Testing', () => {
     test.each([false, ['Invalid']])('Passing an invalid alias should throw an error', () => {
         expect((input) => {
             // eslint-disable-next-line no-unused-vars
@@ -143,12 +143,12 @@ describe('Initial `aliasCollection` Testing', () => {
 
     test('Passing a single good aliases results in a collection', () => {
         expect(oparea.grids.config.aliasCollection([alias1])).toEqual([alias1])
-        expect(oparea.grids.config.validAliasCollection([alias1])).toBeTruthy()
+        expect(oparea.grids.validation.validAliasCollection([alias1])).toBeTruthy()
     })
 
     test('Passing two unique good aliases results in a single concatenated collection', () => {
         expect(oparea.grids.config.aliasCollection([alias1, alias2])).toEqual([alias1, alias2])
-        expect(oparea.grids.config.validAliasCollection([alias1, alias2])).toBeTruthy()
+        expect(oparea.grids.validation.validAliasCollection([alias1, alias2])).toBeTruthy()
     })
 
     test('Passing multiple alias objects with repeated alias keys and refersTo consolidates to a concatenated array', () => {
@@ -159,7 +159,7 @@ describe('Initial `aliasCollection` Testing', () => {
         ]
 
         expect(oparea.grids.config.aliasCollection(input)).toEqual(consolidated)
-        expect(oparea.grids.config.validAliasCollection(consolidated)).toBeTruthy()
+        expect(oparea.grids.validation.validAliasCollection(consolidated)).toBeTruthy()
     })
 
     test('Passing a single alias collection should return itself', () => {

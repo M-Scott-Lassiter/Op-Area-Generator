@@ -1,16 +1,36 @@
-// @ts-check
+/**
+ * Functions to generate GeoJSON grids.
+ *
+ * @namespace Grids
+ */
 
 /**
- * All type definitions for configuring grids.
+ * Provides helper functions used to create valid configuration objects to generate grids.
  *
- * @namespace GridConfig
+ * @namespace Grids.Config
+ */
+
+/**
+ * Provides validation methods for grid configuration objects.
+ *
+ * @namespace Grids.Validation
+ */
+
+/**
+ * Provides validation methods for grid configuration objects.
+ *
+ * @namespace Grids.Definitions
+ */
+
+/**
+ * @typedef {number} MyTestType
  */
 
 /**
  * Sets the parameters for grid naming and labeling when constructing a new grid area.
  *
- * @typedef {object} GridConfig.Naming
- * @memberOf GridConfig
+ * @typedef {object} Naming
+ * @memberof Grids.Definitions
  * @property {boolean} allowLowerCaseLetters=false Determines whether or not the grid letters may be lower case
  * @property {string} dictionary='ABCDEFGHIJKLMNOPQRSTUVWXYZ' Dictionary to use for the lettered axis
  * @property {boolean} numbersFirst=false If set to true, the grid square names will concatenate with the number before the letter (e.g. <code>'5B'</code>). Default is false (e.g. <code>'C7'</code>)
@@ -29,8 +49,8 @@
 /**
  * Defines how an axis behaves.
  *
- * @typedef {object} GridConfig.AxisOptions
- * @memberOf GridConfig
+ * @typedef {object} AxisOptions
+ * @memberof Grids.Definitions
  * @property {number} quantity=10 Positive integer that determines how many grid squares will be on this axis
  * @property {boolean} extendsPositive=true If true, numbers/letters get larger from south to north for the latitude axis, and west to east on the longitude axis.
  * Set to false to reverse these directions.
@@ -42,8 +62,8 @@
 /**
  * An array of grid squares that will get omitted from the final grid definition.
  *
- * @typedef {string[]} GridConfig.OmittedGridSquares
- * @memberOf GridConfig
+ * @typedef {string[]} OmittedGridSquares
+ * @memberof Grids.Definitions
  * @example
  * const singleOmit = ['A5']
  * const multipleOmits = ['A5', 'C7', 'E10']
@@ -53,8 +73,8 @@
  * Used to define a code word (or alias) that corresponds to a particular grid square or range of grid squares.
  * For validity, this object may only have these two properties and must follow the rules described below.
  *
- * @typedef {object} GridConfig.Alias
- * @memberOf GridConfig
+ * @typedef {object} Alias
+ * @memberof Grids.Definitions
  * @property {string} alias The alias id (e.g. <code>'MANTA'</code>). Must be any non-empty string.
  * @property {string[]} refersTo An array strings corresponding to grid IDs or other aliases. May be an empty array. Values must be unique.
  * @example
@@ -66,9 +86,9 @@
 /**
  * A collection of unique alias itendifiers.
  *
- * @typedef {array} GridConfig.AliasCollection
- * @memberOf GridConfig
- * @property {GridConfig.Alias[]} aliases A consolidated array of one or more {@link GridConfig.Alias} objects for grid squares. There can only be one entry for each alias.
+ * @typedef {Alias[]} AliasCollection
+ * @memberof Grids.Definitions
+ * @property {Grids.Definitions.Alias[]} aliases A consolidated array of one or more {@link Alias} objects for grid squares. There can only be one entry for each alias.
  * @example
  * const collectionOne = [{ alias: 'MANTA', refersTo: ['A5'] }]
  * const collectionTwo = [{ alias: 'MANTA', refersTo: ['A5'] },
@@ -82,8 +102,8 @@
  * The difference between the western and eastern boundaries cannot exceed 360 degrees.
  * For boundaries that cross the antimeridian, the western boundary will be greater than the eastern bounday.
  *
- * @typedef {object} GridConfig.GeographicBoundaries
- * @memberOf GridConfig
+ * @typedef {object} Boundaries
+ * @memberof Grids.Definitions
  * @property {number} west Western most boundary (Between -180 to 180)
  * @property {number} south Southern most boundary (Between -90 to 90)
  * @property {number} east Eastern most boundary (Between -180 to 180)
@@ -98,14 +118,14 @@
  * Only the boundaries are required. If the other configuration objects are not included, then the geographic grid
  * will assume the defaults for each.
  *
- * @typedef {object} GridConfig.GeographicGridConfig
- * @memberOf GridConfig
- * @property {GridConfig.GeographicBoundaries} boundaries Define the boundaries for this grid configuration
- * @property {GridConfig.Naming} [naming] A grid naming configuration object
- * @property {GridConfig.AxisOptions} [longitudeAxis] Longitude axis configuration object
- * @property {GridConfig.AxisOptions} [latitudeAxis] Latitude axis configuration object
- * @property {GridConfig.OmittedGridSquares} [omits] Grid squares to exclude from this configuration
- * @property {GridConfig.Alias|GridConfig.AliasCollection} [aliases] Defines aliases for grid squares
+ * @typedef {object} GeographicGridConfig
+ * @memberof Grids.Definitions
+ * @property {Grids.Definitions.Boundaries} boundaries Define the boundaries for this grid configuration
+ * @property {Grids.Definitions.Naming} [naming] A grid naming configuration object
+ * @property {Grids.Definitions.AxisOptions} [longitudeAxis] Longitude axis configuration object
+ * @property {Grids.Definitions.AxisOptions} [latitudeAxis] Latitude axis configuration object
+ * @property {Grids.Definitions.OmittedGridSquares} [omits] Grid squares to exclude from this configuration
+ * @property {Grids.Definitions.Alias|Grids.Definitions.AliasCollection} [aliases] Defines aliases for grid squares
  * @example
  * const simpleConfig = { boundaries: { west: 20, south: -15.5, east: 40.25, north: 15.5 } }
  *
@@ -125,3 +145,11 @@
  *                                { alias: 'RAY', refersTo: ['COFFEE', 'MANTA', 'A6', 'B5', 'B6'] }]
  *                 }
  */
+
+// exports.Grids = {}
+// exports.Grids.Definitions = {}
+// exports.Grids.Validation = {}
+// exports.Grids.Config = {}
+// exports.Grids.Definitions.Boundaries = {}
+
+exports.unused = {}
