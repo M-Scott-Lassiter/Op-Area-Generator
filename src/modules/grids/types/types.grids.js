@@ -13,60 +13,13 @@
 /**
  * Provides validation methods for grid configuration objects.
  *
- * @namespace Grids.Validation
+ * @namespace Grids.Definitions
  */
 
 /**
  * Provides validation methods for grid configuration objects.
  *
- * @namespace Grids.Definitions
- */
-
-/**
- * @typedef {number} MyTestType
- */
-
-/**
- * Sets the parameters for grid naming and labeling when constructing a new grid area.
- *
- * @typedef {object} Naming
- * @memberof Grids.Definitions
- * @property {boolean} allowLowerCaseLetters=false Determines whether or not the grid letters may be lower case
- * @property {string} dictionary='ABCDEFGHIJKLMNOPQRSTUVWXYZ' Dictionary to use for the lettered axis
- * @property {boolean} numbersFirst=false If set to true, the grid square names will concatenate with the number before the letter (e.g. <code>'5B'</code>). Default is false (e.g. <code>'C7'</code>)
- * @property {number} numberPadding=0 Positive integer corresponding to leading zeros before the number. If <code>0</code> (default) then numbers will not be padded. (e.g. numberPadding=2 => <code>C007</code>)
- * @property {boolean} numericAxisOnHorizontal=false The numeric axis defaults to east/west. If set to true, the numeric axis will be north/south
- * @example
- * const nameObject = {
- *                         allowLowerCaseLetters: true,
- *                         dictionary: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
- *                         numbersFirst: false,
- *                         numberPadding: 0,
- *                         numericAxisOnHorizontal: false
- *                     }
- */
-
-/**
- * Defines how an axis behaves.
- *
- * @typedef {object} AxisOptions
- * @memberof Grids.Definitions
- * @property {number} quantity=10 Positive integer that determines how many grid squares will be on this axis
- * @property {boolean} extendsPositive=true If true, numbers/letters get larger from south to north for the latitude axis, and west to east on the longitude axis.
- * Set to false to reverse these directions.
- * @example
- * axis1 = {quantity: 24, extendsPositive: false},
- * axis2 = {quantity: 15, extendsPositive: true},
- */
-
-/**
- * An array of grid squares that will get omitted from the final grid definition.
- *
- * @typedef {string[]} OmittedGridSquares
- * @memberof Grids.Definitions
- * @example
- * const singleOmit = ['A5']
- * const multipleOmits = ['A5', 'C7', 'E10']
+ * @namespace Grids.Validation
  */
 
 /**
@@ -97,6 +50,24 @@
  */
 
 /**
+ * Defines how an axis behaves for a grid construction function.
+ *
+ * @typedef {object} AxisOptions
+ * @memberof Grids.Definitions
+ * @property {number} [quantity=10] Positive non-zero, non-infinite number that determines how many grid squares will be on this axis.
+ * Grid construction functions will round decimals up to the next integer.
+ * @property {boolean} [extendsPositive=true] If true, numbers/letters get larger from south to north (for a latitude axis), and west to east (for a longitude axis).
+ * Set to false to reverse these directions.
+ * @example
+ * // These are all valid axis objects. Omitted properties will cause grid construction functions to assume default values.
+ * axis1 = {quantity: 24, extendsPositive: false},
+ * axis2 = {quantity: 15, extendsPositive: true},
+ * axis3 = {quantity: 10},
+ * axis4 = {extendsPositive: true},
+ * axis5 = {},
+ */
+
+/**
  * Defines the boundaries of a geographic grid. Northern and southern boundaries cannot exceed the poles (+90 and -90, respectively).
  * The northern boundary must be larger than the southern boundary.
  * The difference between the western and eastern boundaries cannot exceed 360 degrees.
@@ -124,7 +95,7 @@
  * @property {Grids.Definitions.Naming} [naming] A grid naming configuration object
  * @property {Grids.Definitions.AxisOptions} [longitudeAxis] Longitude axis configuration object
  * @property {Grids.Definitions.AxisOptions} [latitudeAxis] Latitude axis configuration object
- * @property {Grids.Definitions.OmittedGridSquares} [omits] Grid squares to exclude from this configuration
+ * @property {Grids.Definitions.Omits} [omits] Grid squares to exclude from this configuration
  * @property {Grids.Definitions.Alias|Grids.Definitions.AliasCollection} [aliases] Defines aliases for grid squares
  * @example
  * const simpleConfig = { boundaries: { west: 20, south: -15.5, east: 40.25, north: 15.5 } }
@@ -151,5 +122,35 @@
 // exports.Grids.Validation = {}
 // exports.Grids.Config = {}
 // exports.Grids.Definitions.Boundaries = {}
+
+/**
+ * Sets the parameters for grid naming and labeling when constructing a new grid area.
+ *
+ * @typedef {object} Naming
+ * @memberof Grids.Definitions
+ * @property {boolean} allowLowerCaseLetters=false Determines whether or not the grid letters may be lower case
+ * @property {string} dictionary='ABCDEFGHIJKLMNOPQRSTUVWXYZ' Dictionary to use for the lettered axis
+ * @property {boolean} numbersFirst=false If set to true, the grid square names will concatenate with the number before the letter (e.g. <code>'5B'</code>). Default is false (e.g. <code>'C7'</code>)
+ * @property {number} numberPadding=0 Positive integer corresponding to leading zeros before the number. If <code>0</code> (default) then numbers will not be padded. (e.g. numberPadding=2 => <code>C007</code>)
+ * @property {boolean} numericAxisOnHorizontal=false The numeric axis defaults to east/west. If set to true, the numeric axis will be north/south
+ * @example
+ * const nameObject = {
+ *                         allowLowerCaseLetters: true,
+ *                         dictionary: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+ *                         numbersFirst: false,
+ *                         numberPadding: 0,
+ *                         numericAxisOnHorizontal: false
+ *                     }
+ */
+
+/**
+ * An array of grid squares that will get omitted from the final grid definition.
+ *
+ * @typedef {string[]} Omits
+ * @memberof Grids.Definitions
+ * @example
+ * const singleOmit = ['A5']
+ * const multipleOmits = ['A5', 'C7', 'E10']
+ */
 
 exports.unused = {}

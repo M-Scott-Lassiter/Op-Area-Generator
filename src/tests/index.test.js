@@ -47,7 +47,9 @@ describe('Main Object Testing', () => {
                 expect('validAliasCollection' in oparea.grids.validation).toBeTruthy()
             })
 
-            test.todo('Contains grids.validation.validAxisOptions')
+            test('Contains grids.validation.validAxisOptions', () => {
+                expect('validAxisOptions' in oparea.grids.validation).toBeTruthy()
+            })
 
             test.todo('Contains grids.validation.validBoundaries')
 
