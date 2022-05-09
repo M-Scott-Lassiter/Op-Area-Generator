@@ -53,7 +53,9 @@ describe('Main Object Testing', () => {
                 expect('validAxisOptions' in oparea.grids.validation).toBeTruthy()
             })
 
-            test.todo('Contains grids.validation.validBoundaries')
+            test('Contains grids.validation.validBoundaries', () => {
+                expect('validBoundaries' in oparea.grids.validation).toBeTruthy()
+            })
 
             test.todo('Contains grids.validation.validGeographicGridConfig')
 
