@@ -54,9 +54,9 @@
  *
  * @typedef {object} AxisOptions
  * @memberof Grids.Definitions
- * @property {number} [quantity=10] Positive non-zero, non-infinite number that determines how many grid squares will be on this axis.
+ * @property {number} [quantity] Positive non-zero, non-infinite number that determines how many grid squares will be on this axis.
  * Grid construction functions will round decimals up to the next integer.
- * @property {boolean} [extendsPositive=true] If true, numbers/letters get larger from south to north (for a latitude axis), and west to east (for a longitude axis).
+ * @property {boolean} [extendsPositive] If true, numbers/letters get larger from south to north (for a latitude axis), and west to east (for a longitude axis).
  * Set to false to reverse these directions.
  * @example
  * // These are all valid axis objects. Omitted properties will cause grid construction functions to assume default values.
@@ -70,7 +70,7 @@
 /**
  * Defines the boundaries of a geographic grid. Northern and southern boundaries cannot exceed the poles (+90 and -90, respectively).
  * The northern boundary must be larger than the southern boundary.
- * The difference between the western and eastern boundaries cannot exceed 360 degrees.
+ * The western and eastern boundaries must each be in the range of -180 to 180.
  * For boundaries that cross the antimeridian, the western boundary will be greater than the eastern bounday.
  *
  * @typedef {object} Boundaries

@@ -4,8 +4,8 @@ const helpers = require('../../../helpers')
  * Used to create a properly validated and formatted axisOptions object.
  *
  * @memberof Grids.Config
- * @param {number} numGridAxisDivisions=10 Number of divisions an axis will be split into. Coerces any positive, non-zero, non-infinite numeric value to an integer
- * @param {boolean} extendAxisPositive=true Whether an axis will extend in the positive or negative direction.
+ * @param {number} [numGridAxisDivisions=10] Number of divisions an axis will be split into. Coerces any positive, non-zero, non-infinite numeric value to an integer
+ * @param {boolean} [extendAxisPositive=true] Whether an axis will extend in the positive or negative direction.
  * Accepts any truthy or falsy statement and coerces it to a boolean
  * @returns {Grids.Definitions.AxisOptions} Properly formatted axis options object
  * @throws {Error} Grid divisions must be coercible to a positive non-zero number.

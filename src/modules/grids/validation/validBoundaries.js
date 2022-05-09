@@ -32,16 +32,11 @@ function validBoundaries(boundariesToCheck) {
     }
 
     // North and south boundaries cannot exceed the poles (90 degrees), and North must be greater than south
+    // Eastern and western boundaries must be in the range of -180 to 180
     if (
         boundariesToCheck.north > 90 ||
         boundariesToCheck.south < -90 ||
-        boundariesToCheck.north <= boundariesToCheck.south
-    ) {
-        return false
-    }
-
-    // Eastern and western boundaries must be in the range of -180 to 180
-    if (
+        boundariesToCheck.north <= boundariesToCheck.south ||
         boundariesToCheck.east > 180 ||
         boundariesToCheck.east < -180 ||
         boundariesToCheck.west > 180 ||
