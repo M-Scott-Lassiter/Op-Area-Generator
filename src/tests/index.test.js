@@ -23,7 +23,9 @@ describe('Main Object Testing', () => {
                 expect('aliasCollection' in oparea.grids.config).toBeTruthy()
             })
 
-            test.todo('Contains grids.config.axisOptions')
+            test('Contains grids.config.axisOptions', () => {
+                expect('axisOptions' in oparea.grids.config).toBeTruthy()
+            })
 
             test('Contains grids.config.boundaries', () => {
                 expect('boundaries' in oparea.grids.config).toBeTruthy()
