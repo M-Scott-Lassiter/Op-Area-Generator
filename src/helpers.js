@@ -30,5 +30,20 @@ function uniqueArray(arrayToTest) {
     return false
 }
 
+/**
+ * This unusual comparison is used to handle the edge case of NaN by comparing an object to itself. Only NaN does not equal itself.
+ *
+ * @see {@link https://stackoverflow.com/a/16988441/6186333}
+ * @private
+ * @ignore
+ * @param {any} valueToTest Any value, object, or type
+ * @returns {boolean} True if value was literally NaN, false in all other cases
+ */
+function valueEqualsNaN(valueToTest) {
+    // eslint-disable-next-line no-self-compare
+    return valueToTest !== valueToTest
+}
+
 exports.toArray = toArray
 exports.uniqueArray = uniqueArray
+exports.valueEqualsNaN = valueEqualsNaN
