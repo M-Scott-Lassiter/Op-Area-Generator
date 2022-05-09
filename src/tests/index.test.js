@@ -36,8 +36,14 @@ describe('Main Object Testing', () => {
             })
 
             test.todo('Contains grids.config.naming')
+            // test.todo('Contains grids.config.naming', () => {
+            //     expect('naming' in oparea.grids.config).toBeTruthy()
+            // })
 
             test.todo('Contains grids.config.omits')
+            // test.todo('Contains grids.config.omits', () => {
+            //     expect('omits' in oparea.grids.config).toBeTruthy()
+            // })
         })
 
         describe('Contains Grids.Validation', () => {
@@ -61,7 +67,9 @@ describe('Main Object Testing', () => {
 
             test.todo('Contains grids.validation.validNaming')
 
-            test.todo('Contains grids.validation.validOmits')
+            test('Contains grids.validation.validOmits', () => {
+                expect('validOmits' in oparea.grids.validation).toBeTruthy()
+            })
         })
     })
 })
