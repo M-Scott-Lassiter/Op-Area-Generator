@@ -65,7 +65,9 @@ describe('Main Object Testing', () => {
 
             test.todo('Contains grids.validation.validGeographicGridConfig')
 
-            test.todo('Contains grids.validation.validNaming')
+            test('Contains grids.validation.validNaming', () => {
+                expect('validNaming' in oparea.grids.validation).toBeTruthy()
+            })
 
             test('Contains grids.validation.validOmits', () => {
                 expect('validOmits' in oparea.grids.validation).toBeTruthy()

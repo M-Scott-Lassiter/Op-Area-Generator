@@ -128,11 +128,13 @@
  *
  * @typedef {object} Naming
  * @memberof Grids.Definitions
- * @property {boolean} allowLowerCaseLetters=false Determines whether or not the grid letters may be lower case
- * @property {string} dictionary='ABCDEFGHIJKLMNOPQRSTUVWXYZ' Dictionary to use for the lettered axis
- * @property {boolean} numbersFirst=false If set to true, the grid square names will concatenate with the number before the letter (e.g. <code>'5B'</code>). Default is false (e.g. <code>'C7'</code>)
- * @property {number} numberPadding=0 Positive integer corresponding to leading zeros before the number. If <code>0</code> (default) then numbers will not be padded. (e.g. numberPadding=2 => <code>C007</code>)
- * @property {boolean} numericAxisOnHorizontal=false The numeric axis defaults to east/west. If set to true, the numeric axis will be north/south
+ * @property {boolean} [allowLowerCaseLetters] Determines whether or not the grid letters may be lower case
+ * @property {string} [dictionary] Dictionary to use for the lettered axis. Follows the validation rules found at {@link https://github.com/M-Scott-Lassiter/Alphanumeric-Encoder/blob/main/API.md#dictionary}
+ * @property {boolean} [numbersFirst] If set to true, the grid square names will concatenate with the number before the letter (e.g. <code>'5B'</code>). Default is false (e.g. <code>'C7'</code>)
+ * @property {number} [numberPadding] Positive integer between 0 and 10 corresponding to leading zeros before the number.
+ * If <code>0</code> (default) then numbers will not be padded. (e.g. numberPadding=2 creates grid IDs such as <code>C007</code>).
+ * This value is limited to 10 as a practical upper bounds. If passed a decimal, the grid configuration functions will round down to the nearest integer.
+ * @property {boolean} [numericAxisOnHorizontal] The numeric axis defaults to east/west. If set to true, the numeric axis will be north/south
  * @example
  * const nameObject = {
  *                         allowLowerCaseLetters: true,
@@ -144,7 +146,7 @@
  */
 
 /**
- * An array of grid squares that will get omitted from the final grid definition.
+ * An array of grid squares that will get omitted from the final grid definition. When configuring a grid, any grid ID that has a matching string in this array will get omitted.
  *
  * @typedef {string[]} Omits
  * @memberof Grids.Definitions

@@ -26,7 +26,6 @@
         "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
 
         "jsdoc/check-param-names": ["off", { "useDefaultObjectProperties": false }],
-        "jsdoc/valid-types": ["off"],
         "jsdoc/no-undefined-types": ["off"],
 
         "jest/no-disabled-tests": "warn",

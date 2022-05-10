@@ -5,6 +5,7 @@ const { validAliasCollection } = require('./modules/grids/validation/validAliasC
 const { validAxisOptions } = require('./modules/grids/validation/validAxisOptions')
 const { validBoundaries } = require('./modules/grids/validation/validBoundaries')
 const { validOmits } = require('./modules/grids/validation/validOmits')
+const { validNaming } = require('./modules/grids/validation/validNaming')
 const gridConfig = require('./modules/grids/grids.config')
 
 exports.grids = {
@@ -15,6 +16,7 @@ exports.grids = {
         validAliasCollection,
         validAxisOptions,
         validBoundaries,
-        validOmits
+        validOmits,
+        validNaming
     }
 }
