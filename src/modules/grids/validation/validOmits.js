@@ -1,10 +1,9 @@
 /**
- * Validates a boundaries object for correct formatting.
+ * Validates an omit array for correct formatting.
  *
  * @memberof Grids.Validation
- * @see GridConfig.Boundaries for validity requirements.
- * @param {Grids.Definitions.Boundaries} omitArrayToCheck A boundaries options object to check for validity
- * @returns {boolean} True if a valid boundaries object
+ * @param {Grids.Definitions.Omits} omitArrayToCheck An omits array to check for validity
+ * @returns {boolean} True if a valid omit array
  */
 function validOmits(omitArrayToCheck) {
     // Input must be an array, or validation fails
