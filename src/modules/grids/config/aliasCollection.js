@@ -64,7 +64,7 @@ function aliasCollection(aliasesObjects) {
         // Check each of these new elements for validity before calling them safe
         destructuredArray.forEach((element) => {
             if (!validAlias(element)) {
-                throw new Error('Argument contains an invalid alias2.')
+                throw new Error('Argument contains an invalid alias.')
             }
         })
         safeArray = destructuredArray

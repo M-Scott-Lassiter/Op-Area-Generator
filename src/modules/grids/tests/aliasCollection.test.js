@@ -2,20 +2,33 @@ const oparea = require('../../../index')
 const data = require('./grids.testdata')
 
 describe('Function `aliasCollection` Testing', () => {
-    test.each([false, ['Invalid']])('Passing an invalid alias should throw an error', () => {
-        expect((input) => {
-            oparea.grids.config.aliasCollection(input)
-        }).toThrow(/invalid alias/)
-    })
-
-    test.each([data.alias2, [data.alias1, data.alias3]])(
-        'Passing invalid alias collections should throw an error',
+    test.each([[false], [['Invalid']]])(
+        'Passing an invalid alias should throw an error" aliasCollection(%p)',
         () => {
             expect((input) => {
+                console.log(input)
                 oparea.grids.config.aliasCollection(input)
             }).toThrow(/invalid alias/)
         }
     )
+
+    test('Passing invalid alias collection with repeated alias keys throws an error: aliasCollection([[data.alias1, data.alias3]])', () => {
+        expect(() => {
+            oparea.grids.config.aliasCollection([[data.alias1, data.alias3]])
+        }).toThrow(/invalid alias collection/)
+    })
+
+    test('Passing a single alias collection of nonsense throws an error: aliasCollection([[{ invalid: 1 }]])', () => {
+        expect(() => {
+            oparea.grids.config.aliasCollection([[{ invalid: 1 }]])
+        }).toThrow(/invalid alias collection/)
+    })
+
+    test(`Passing multiple alias collections of nonsense throws an error: aliasCollection([[{ invalid: 1 }], 'nonsense'])`, () => {
+        expect(() => {
+            oparea.grids.config.aliasCollection([[{ invalid: 1 }], 'nonsense'])
+        }).toThrow(/invalid alias/)
+    })
 
     test('Passing a single good aliases results in a collection', () => {
         expect(oparea.grids.config.aliasCollection([data.alias1])).toEqual([data.alias1])
