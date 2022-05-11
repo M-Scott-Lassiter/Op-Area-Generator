@@ -16,8 +16,7 @@ describe('Function `validNaming` Testing', () => {
     })
 
     test.each(badValuesWithNumber)('Known bad values return False: validNaming(%p)', (input) => {
-        const testValue = { allowLowerCaseLetters: input }
-        expect(oparea.grids.validation.validAxisOptions(testValue)).toBeFalsy()
+        expect(oparea.grids.validation.validNaming(input)).toBeFalsy()
     })
 
     // Only five keys may exist:
