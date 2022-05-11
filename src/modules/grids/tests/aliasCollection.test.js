@@ -6,7 +6,6 @@ describe('Function `aliasCollection` Testing', () => {
         'Passing an invalid alias should throw an error" aliasCollection(%p)',
         () => {
             expect((input) => {
-                console.log(input)
                 oparea.grids.config.aliasCollection(input)
             }).toThrow(/invalid alias/)
         }
