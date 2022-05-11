@@ -1,5 +1,5 @@
 const oparea = require('../../../index')
-const data = require('./grids.testdata')
+// const data = require('./grids.testdata')
 
 describe('Function `boundaries` Testing', () => {
     const badValues = [null, '', NaN, 200, -200, Infinity, -Infinity, 'Some string', { value: 2 }]
@@ -51,9 +51,24 @@ describe('Function `boundaries` Testing', () => {
         }
     )
 
+    test('North cannot equal south. Throws Error: boundaries(-10, -20, 10, -20)', () => {
+        expect(() => {
+            oparea.grids.config.boundaries(-10, -20, 10, -20)
+        }).toThrow()
+    })
+
+    test('North cannot be less than south. Throws Error: boundaries(-10, -20, 10, -21)', () => {
+        expect(() => {
+            oparea.grids.config.boundaries(-10, -20, 10, -21)
+        }).toThrow()
+    })
+
     test('Calling function with no inputs returns default: boundaries() -> { west: -10, south: -20, east: 10, north: 20 }', () => {
-        expect(oparea.grids.config.aliasCollection(data.validAliasCollection)).toEqual(
-            data.validAliasCollection
-        )
+        expect(oparea.grids.config.boundaries()).toEqual({
+            west: -10,
+            south: -20,
+            east: 10,
+            north: 20
+        })
     })
 })

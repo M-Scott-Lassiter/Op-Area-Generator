@@ -43,7 +43,7 @@ function boundaries(western = -10, southern = -20, eastern = 10, northern = 20) 
     evaluateValidity(northern)
 
     // North and south boundaries cannot exceed the poles (90 degrees), and North must be greater than south
-    if (northern > 90 || southern < -90 || northern <= southern) {
+    if (northern > 90 || southern < -90) {
         throw new Error('Northern and southern boundaries cannot exceed 90 or -90, respectively.')
     }
 
