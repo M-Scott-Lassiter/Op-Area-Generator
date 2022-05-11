@@ -35,10 +35,9 @@ describe('Main Object Testing', () => {
                 expect('configGeographic' in oparea.grids.config).toBeTruthy()
             })
 
-            test.todo('Contains grids.config.naming')
-            // test.todo('Contains grids.config.naming', () => {
-            //     expect('naming' in oparea.grids.config).toBeTruthy()
-            // })
+            test('Contains grids.config.naming', () => {
+                expect('naming' in oparea.grids.config).toBeTruthy()
+            })
 
             test.todo('Contains grids.config.omits')
             // test.todo('Contains grids.config.omits', () => {
