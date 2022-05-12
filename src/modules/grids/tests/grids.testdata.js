@@ -47,6 +47,23 @@ exports.invalidDictionaries = [
     ...badValues
 ]
 
+exports.validOmits = [
+    // An array of arrays... each wrapped in an extra array. Without each array being in its own array, Jest testing does not pick it up right
+    [[]],
+    [['A1']],
+    [['A1', 'A2', 'G2']],
+    [['A1', 'A2', 'G2', 'undefined']],
+    [['A1', 'A2', 'G2', '[A3]']],
+    [['2, 3, 4, 5, 6', 'some random string', '[A2]']]
+]
+exports.invalidOmits = [
+    ['A1', 'A2', 'G2', 3],
+    ['A1', 'A2', 'G2', undefined],
+    ['A1', 'A2', 'G2', ['A3']],
+    [2, 3, 4, 5, 6],
+    ...exports.falsyValues
+]
+
 exports.validNumberPadding = [0, 0.0001, 1, 2, 3, 4, 5, 6, 7, 8, 9, 9.5, 10]
 exports.invalidNumberPadding = [-1, -10, -Infinity, 10.001, 11, 200, ...badValues]
 
