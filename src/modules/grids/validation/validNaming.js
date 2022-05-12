@@ -26,7 +26,8 @@ function validNaming(namingObjectToCheck) {
                 keys[i] === 'dictionary' ||
                 keys[i] === 'numbersFirst' ||
                 keys[i] === 'numberPadding' ||
-                keys[i] === 'numericAxisOnHorizontal'
+                keys[i] === 'numericAxisOnHorizontal' ||
+                keys[i] === 'gridSystemID'
             )
         ) {
             return false
@@ -86,6 +87,14 @@ function validNaming(namingObjectToCheck) {
         } catch (error) {
             return false
         }
+    }
+
+    // gridSystemID must be a string of any length or content
+    if (
+        'gridSystemID' in namingObjectToCheck &&
+        typeof namingObjectToCheck.gridSystemID !== 'string'
+    ) {
+        return false
     }
 
     // All validations passed, return true

@@ -1,4 +1,5 @@
 const { validNaming } = require('../validation/validNaming')
+const data = require('./grids.testdata')
 
 describe('Function `validNaming` Testing', () => {
     const defaultObject = {
@@ -19,14 +20,15 @@ describe('Function `validNaming` Testing', () => {
         expect(validNaming(input)).toBeFalsy()
     })
 
-    // Only five keys may exist:
-    //   'allowLowerCaseLetters', 'dictionary', 'numbersFirst', 'numberPadding', 'numericAxisOnHorizontal' or any combination
+    // Only six keys may exist:
+    //   'allowLowerCaseLetters', 'dictionary', 'numbersFirst', 'numberPadding', 'numericAxisOnHorizontal', 'gridSystemID, or any combination
     test.each([
         { allowLowerCaseLetters: false },
         { dictionary: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' },
         { numbersFirst: false },
         { numberPadding: 0 },
         { numericAxisOnHorizontal: false },
+        { gridSystemID: 'Grid ID Name' },
         { dictionary: 'ABCD', numbersFirst: false, numberPadding: 0 },
         defaultObject
     ])('Object must contain any combination of allowed properties. Returns True: %p', (input) => {
@@ -38,12 +40,13 @@ describe('Function `validNaming` Testing', () => {
         { extra: 22, dictionary: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' },
         { numbersFirst: false, extra: 'nope' },
         { numberPadding: 0, extra: false },
-        { numericAxisOnHorizontal: false, extraProp: 0 }
+        { numericAxisOnHorizontal: false, extraProp: 0 },
+        { gridSystemID: 'Grid ID Name', numericAxisOnHorizontal: false, extraProp: 0 }
     ])('Axis does not have additional foreign properties. Returns False: %p', (input) => {
         expect(validNaming(input)).toBeFalsy()
     })
 
-    test.each(badValuesWithNumber)(
+    test.each(data.nonBooleanValues)(
         'allowLowerCaseLetters must be boolean. Returns False:{ allowLowerCaseLetters: %p }',
         (input) => {
             const testValue = { allowLowerCaseLetters: input }
@@ -59,7 +62,7 @@ describe('Function `validNaming` Testing', () => {
         }
     )
 
-    test.each(badValuesWithNumber)(
+    test.each(data.nonBooleanValues)(
         'numbersFirst must be boolean. Returns False:{ numbersFirst: %p }',
         (input) => {
             const testValue = { numbersFirst: input }
@@ -75,7 +78,7 @@ describe('Function `validNaming` Testing', () => {
         }
     )
 
-    test.each(badValuesWithNumber)(
+    test.each(data.nonBooleanValues)(
         'numericAxisOnHorizontal must be boolean. Returns False:{ numericAxisOnHorizontal: %p }',
         (input) => {
             const testValue = { numericAxisOnHorizontal: input }
@@ -91,39 +94,42 @@ describe('Function `validNaming` Testing', () => {
         }
     )
 
-    test.each(badValues)(
-        'numberPadding must be numeric. Returns False:{ numberPadding: %p }',
+    test.each(data.invalidNumberPadding)(
+        'numberPadding must be numeric between 0 and 10. Returns False:{ numberPadding: %p }',
         (input) => {
             const testValue = { numberPadding: input }
             expect(validNaming(testValue)).toBeFalsy()
         }
     )
 
-    test.each([-1, -10, -Infinity, 10.001, 11, 200])(
-        'numberPadding must be between 0 and 10. Returns False:{ numberPadding: %p }',
-        (input) => {
-            const testValue = { numberPadding: input }
-            expect(validNaming(testValue)).toBeFalsy()
-        }
-    )
-
-    test.each([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 9.5, 10])(
-        'numberPadding must be between 0 and 10. Returns True:{ numberPadding: %p }',
+    test.each(data.validNumberPadding)(
+        'numberPadding must be numeric between 0 and 10. Returns True:{ numberPadding: %p }',
         (input) => {
             const testValue = { numberPadding: input }
             expect(validNaming(testValue)).toBeTruthy()
         }
     )
 
-    test(`Dictionary cannot have repeated letters. Returns False: { dictionary: 'ABCDA'}`, () => {
-        expect(validNaming({ dictionary: 'ABCDA' })).toBeFalsy()
-    })
+    test.each(data.dictionariesWithRepeating)(
+        `Dictionary cannot have repeated letters. Returns False: { dictionary: %p}`,
+        (input) => {
+            expect(validNaming({ dictionary: input })).toBeFalsy()
+        }
+    )
 
     test(`Dictionary cannot have numbers. Returns False: { dictionary: 'ABC123' }`, () => {
         expect(validNaming({ dictionary: 'ABC123' })).toBeFalsy()
     })
 
-    test.each(['ABC', 'abc', 'AbCdEfG', 'PLKNA', 'ZYX'])(
+    test.each(data.invalidDictionaries)(
+        'Invalid dictionary values. Returns False:{ dictionary: %p }',
+        (input) => {
+            const testValue = { dictionary: input }
+            expect(validNaming(testValue)).toBeFalsy()
+        }
+    )
+
+    test.each(data.dictionariesNoRepeating)(
         'Valid dictionary values. Returns True:{ dictionary: %p }',
         (input) => {
             const testValue = { dictionary: input }
@@ -131,10 +137,18 @@ describe('Function `validNaming` Testing', () => {
         }
     )
 
-    test.each([...badValues, 'ABC!', 'abc(', 'Ab?CdEfG', 'PLK]NA', ',ZYX'])(
-        'Invalid dictionary values. Returns False:{ dictionary: %p }',
+    test.each(data.validGridSystemIDs)(
+        'Valid gridSystemID values. Returns True:{ gridSystemID: %p }',
         (input) => {
-            const testValue = { dictionary: input }
+            const testValue = { gridSystemID: input }
+            expect(validNaming(testValue)).toBeTruthy()
+        }
+    )
+
+    test.each(data.invalidGridSystemIDs)(
+        'Valid gridSystemID values. Returns False:{ gridSystemID: %p }',
+        (input) => {
+            const testValue = { gridSystemID: input }
             expect(validNaming(testValue)).toBeFalsy()
         }
     )

@@ -146,6 +146,7 @@
  * If <code>0</code> (default) then numbers will not be padded. (e.g. numberPadding=2 creates grid IDs such as <code>C007</code>).
  * This value is limited to 10 as a practical upper bounds. If passed a decimal, the grid configuration functions will round down to the nearest integer.
  * @property {boolean} [numericAxisOnHorizontal] The numeric axis defaults to east/west. If set to true, the numeric axis will be north/south
+ * @property {string} [gridSystemID] A string used as an ID to describe the resulting GeoJSON FeatureCollection grid system.
  * @see Grids.Config.naming
  * @see Grids.Validation.validNaming
  * @example
@@ -154,7 +155,8 @@
  *                         dictionary: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
  *                         numbersFirst: false,
  *                         numberPadding: 0,
- *                         numericAxisOnHorizontal: false
+ *                         numericAxisOnHorizontal: false,
+ *                         gridSystemID: 'My Grid System'
  *                     }
  */
 

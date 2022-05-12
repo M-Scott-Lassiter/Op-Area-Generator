@@ -4,7 +4,7 @@ const data = require('./grids.testdata')
 const bounds = data.defaultBoundariesValue
 
 describe('Function `configGeographic` Testing', () => {
-    test.each(data.knownBadValues)(
+    test.each(data.badGeographicConfigValues)(
         'Throws Error on known bad input: configGeographic(%p)',
         (input) => {
             expect(() => {
@@ -22,7 +22,7 @@ describe('Function `configGeographic` Testing', () => {
         )
     })
 
-    test.each([...data.knownBadValues, { west: -10, south: -20, east: 10, north: 200 }])(
+    test.each([...data.badGeographicConfigValues, { west: -10, south: -20, east: 10, north: 200 }])(
         'Optional boundaries object must be valid. Throws error: configGeographic( {boundaries: %p} )',
         (input) => {
             expect(() => {
@@ -37,7 +37,7 @@ describe('Function `configGeographic` Testing', () => {
         )
     })
 
-    test.each(data.knownBadValues)(
+    test.each(data.badGeographicConfigValues)(
         'Optional naming object must be valid. Throws error: configGeographic( {boundaries: bounds, naming: %p} )',
         (input) => {
             expect(() => {
@@ -56,7 +56,7 @@ describe('Function `configGeographic` Testing', () => {
         boundaries: { north: 10, south: 0, east: 1, west: 0 }, // Must be at least one arc second
         longitudeAxis: { quantity: 10000 }
     }
-    test.each([...data.knownBadValues, longitudeSpacingTooSmall])(
+    test.each([...data.badGeographicConfigValues, longitudeSpacingTooSmall])(
         'Optional longitudeAxis object must be valid. Throws error: configGeographic( {boundaries: bounds, longitudeAxis: %p} )',
         (input) => {
             expect(() => {
@@ -75,7 +75,7 @@ describe('Function `configGeographic` Testing', () => {
         boundaries: { north: 1, south: 0, east: 0, west: 10 }, // Must be at least one arc second
         latitudeAxis: { quantity: 10000 }
     }
-    test.each([...data.knownBadValues, latitudeSpacingTooSmall])(
+    test.each([...data.badGeographicConfigValues, latitudeSpacingTooSmall])(
         'Optional latitudeAxis object must be valid. Throws error: configGeographic( {boundaries: bounds, latitudeAxis: %p} )',
         (input) => {
             expect(() => {
@@ -111,7 +111,7 @@ describe('Function `configGeographic` Testing', () => {
         }
     )
 
-    test.each(data.knownBadValues)(
+    test.each(data.badGeographicConfigValues)(
         'Optional aliases must be valid. Throws error: configGeographic( {boundaries: bounds, aliases: %p} )',
         (input) => {
             expect(() => {
@@ -120,10 +120,10 @@ describe('Function `configGeographic` Testing', () => {
         }
     )
 
-    const aliasCollection = [...data.validAliases]
-    aliasCollection.push([data.alias1, data.alias2])
-    aliasCollection.push(data.validAliasCollection)
-    test.each(aliasCollection)(
+    const validAliasCollection = [...data.validAliases]
+    validAliasCollection.push([data.alias1, data.alias2])
+    validAliasCollection.push(data.validAliasCollection)
+    test.each(validAliasCollection)(
         'Optional alias collections must be valid. Returns valid: configGeographic( {boundaries: bounds, aliases: [%p] )',
         (input) => {
             const testOutput = { ...data.defaultGeographicConfig }

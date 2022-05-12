@@ -14,6 +14,7 @@ const encoder = new AlphanumericEncoder()
  * If <code>0</code> (default) then numbers will not be padded. (e.g. numberPadding=2 creates grid IDs such as <code>C007</code>).
  * This value is limited to 10 as a practical upper bounds. If passed a decimal, the grid configuration functions will round down to the nearest integer.
  * @param {boolean} [numericAxisOnHorizontal=false] The numeric axis defaults to east/west. If set to true, the numeric axis will be north/south
+ * @param {string} [gridSystemID=''] A string used to identify the grid configuration. Will correspond to a GeoJSON ID for the FeatureCollection.
  * @returns {Grids.Definitions.Naming} Propertly formatted grid naming object
  * @throws {Error} <code>dictionary</code> contains characters other than lower case or upper case letters
  * @throws {RangeError} <code>numberPadding</code> less than 0 or more than 10
@@ -21,14 +22,15 @@ const encoder = new AlphanumericEncoder()
  *
  * const newName1 = oparea.grids.config.naming()
  * const newName2 = oparea.grids.config.naming(true, 'ABCabc')
- * const newName3 = oparea.grids.config.naming(false, 'ABCXYZ', true, 1, true)
+ * const newName3 = oparea.grids.config.naming(false, 'ABCXYZ', true, 1, true, 'This Grid ID Value')
  */
 function naming(
     allowLowerCaseLetters = false,
     dictionary = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
     numbersFirst = false,
     numberPadding = 0,
-    numericAxisOnHorizontal = false
+    numericAxisOnHorizontal = false,
+    gridSystemID = ''
 ) {
     // Dictionary cannot have numbers.
 
@@ -55,12 +57,17 @@ function naming(
         throw new RangeError('numberPadding must be a number between 0 and 10.')
     }
 
+    if (typeof gridSystemID !== 'string') {
+        throw new Error('gridSystemID must be a string.')
+    }
+
     return {
         allowLowerCaseLetters: !!allowLowerCaseLetters, // !! operator forces truthy/falsy values to a boolean
         dictionary,
         numbersFirst: !!numbersFirst,
         numberPadding,
-        numericAxisOnHorizontal: !!numericAxisOnHorizontal
+        numericAxisOnHorizontal: !!numericAxisOnHorizontal,
+        gridSystemID
     }
 }
 

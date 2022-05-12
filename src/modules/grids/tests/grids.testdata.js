@@ -1,9 +1,32 @@
-const badValues = [null, '', NaN, Infinity, [15], '1', 10.1, -1, 'someStrings', { someBadProp: 2 }] // Intentionally leaves off 'undefined' as this causes problems testing functions that have a default value assigned to it. 'undefined' can thus never get tested.
-
-exports.knownBadValues = badValues
+exports.badFunctionCalls = [
+    null,
+    '',
+    NaN,
+    Infinity,
+    [15],
+    '1',
+    10.1,
+    -1,
+    'someStrings',
+    { someBadProp: 2 }
+] // Intentionally leaves off 'undefined' as this causes problems testing functions that have a default value assigned to it. 'undefined' can thus never get tested.
 exports.truthyValues = [true, 1, 'A', [1], { param: 'Test' }]
 exports.falsyValues = [false, 0, -0, '', null, undefined, NaN]
 exports.falsyValuesNoUndefined = [false, 0, -0, '', null, NaN] // Intentionally leaves off 'undefined' as this causes problems testing functions that have a default value assigned to it. 'undefined' can thus never get tested.
+exports.nonBooleanValues = [
+    null,
+    undefined,
+    '',
+    NaN,
+    Infinity,
+    [1],
+    '1',
+    'some string',
+    { someProp: 2 },
+    22,
+    0
+]
+exports.nonNumericValues = [null, '', NaN, [1], '1', 'some string', { someProp: 2 }]
 
 exports.alias1 = { alias: 'MANTA', refersTo: ['A5'] }
 exports.alias2 = { alias: 'COFFEE', refersTo: ['BLACK', 'ALIEN', 'G22'] }
@@ -27,14 +50,21 @@ exports.validAliasCollection = [
     { alias: 'TAPIOCA', refersTo: ['COFFEE', 'MANTA'] }
 ]
 
-exports.validDictionaries = [
+exports.dictionariesNoRepeating = [
     'ABC',
     'aBcD',
     'ZYX',
     'abc',
     'AbCdEfG',
     'PLKNACZQ',
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+    'abcdefghijklmnopqrstuvwxyz'
+]
+
+exports.dictionariesWithRepeating = [
+    'ABCDA',
+    'abcda',
+    'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 ]
 
 exports.invalidDictionaries = [
@@ -45,7 +75,7 @@ exports.invalidDictionaries = [
     'Ab?CdEfG',
     'PLK]NA',
     ',ZYX',
-    ...badValues
+    ...exports.falsyValuesNoUndefined
 ]
 
 exports.validOmits = [
@@ -66,7 +96,32 @@ exports.invalidOmits = [
 ]
 
 exports.validNumberPadding = [0, 0.0001, 1, 2, 3, 4, 5, 6, 7, 8, 9, 9.5, 10]
-exports.invalidNumberPadding = [-1, -10, -Infinity, 10.001, 11, 200, ...badValues]
+exports.invalidNumberPadding = [
+    -1,
+    -10,
+    -Infinity,
+    10.001,
+    11,
+    200,
+    Infinity,
+    ...exports.nonNumericValues
+]
+
+exports.badGeographicConfigValues = [
+    null,
+    '',
+    NaN,
+    Infinity,
+    [15],
+    '1',
+    10.1,
+    -1,
+    'someStrings',
+    { someBadProp: 2 }
+]
+
+exports.validGridSystemIDs = ['ABC', 'abc', 'This is an ID', 'ID #22', '[ZYX]']
+exports.invalidGridSystemIDs = [false, 0, -0, null, NaN, 2, ['Test'], { id: 'Test Name' }]
 
 exports.defaultBoundariesValue = { west: -10, south: -20, east: 10, north: 20 }
 exports.defaultNamingObject = {
@@ -74,7 +129,8 @@ exports.defaultNamingObject = {
     dictionary: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
     numbersFirst: false,
     numberPadding: 0,
-    numericAxisOnHorizontal: false
+    numericAxisOnHorizontal: false,
+    gridSystemID: ''
 }
 exports.defaultAxisObject = { quantity: 10, extendsPositive: true }
 exports.defaultOmits = []

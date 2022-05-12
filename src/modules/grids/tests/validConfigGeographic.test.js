@@ -12,7 +12,7 @@ describe('Function `validConfigGeographic` Testing', () => {
         expect(validConfigGeographic({})).toBeFalsy()
     })
 
-    test.each(data.knownBadValues)(
+    test.each(data.badGeographicConfigValues)(
         'Bad values not allowed. Returns False: validConfigGeographic(%p)',
         (input) => {
             expect(validConfigGeographic(input)).toBeFalsy()

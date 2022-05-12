@@ -36,7 +36,7 @@ describe('Function `naming` Testing', () => {
         }
     )
 
-    test.each(data.validDictionaries)(
+    test.each([...data.dictionariesNoRepeating, ...data.dictionariesWithRepeating])(
         'dictionary must have valid argument. Returns valid: naming(false, %p)',
         (input) => {
             expect(() => {
@@ -99,6 +99,26 @@ describe('Function `naming` Testing', () => {
         (input) => {
             output.dictionary = 'ABC'
             expect(naming(false, 'ABC', false, 0, input)).toEqual(output)
+        }
+    )
+
+    test.each(data.validGridSystemIDs)(
+        `gridSystemID may be any string value. Returns valid: naming(false, 'ABC', false, 0, false, %p)`,
+
+        (input) => {
+            output.dictionary = 'ABC'
+            output.gridSystemID = input
+            expect(naming(false, 'ABC', false, 0, false, input)).toEqual(output)
+        }
+    )
+
+    test.each(data.invalidGridSystemIDs)(
+        `gridSystemID cannot be non-strings. Throws error: naming(false, 'ABC', false, 0, false, %p)`,
+
+        (input) => {
+            expect(() => {
+                naming(false, 'ABC', false, 0, false, input)
+            }).toThrow()
         }
     )
 })

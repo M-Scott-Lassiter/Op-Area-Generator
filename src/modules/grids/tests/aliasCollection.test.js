@@ -51,6 +51,10 @@ describe('Function `aliasCollection` Testing', () => {
         expect(validAliasCollection(consolidated)).toBeTruthy()
     })
 
+    test('Passing an empty array as an alias collection should return an empty array', () => {
+        expect(aliasCollection([])).toEqual([])
+    })
+
     test('Passing a single alias collection should return itself', () => {
         expect(aliasCollection(data.validAliasCollection)).toEqual(data.validAliasCollection)
     })
