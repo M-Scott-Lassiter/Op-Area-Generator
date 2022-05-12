@@ -30,7 +30,7 @@
         "format": "npx prettier . --write",
         "tableofcontents": "markdown-toc -i ./README.md && markdown-toc -i ./CONTRIBUTING.md",
         "test": "jest --coverage --verbose",
-        "test:dev": "jest --watch --verbose",
+        "test:dev": "jest --watch --coverage --verbose",
         "lint": "eslint . --ext .js --fix",
         "prepare": "husky install"
     },
