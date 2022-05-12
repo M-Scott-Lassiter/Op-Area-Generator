@@ -24,7 +24,7 @@
         "url": "https://github.com/M-Scott-Lassiter/OpArea.git"
     },
     "scripts": {
-        "build": "npm run lint && npm run test && npm run docs && npm run tableofcontents && npm run format",
+        "build": "npm run lint && npm run test && npm run docs && npm run tableofcontents && npm run format && echo \"Build process complete.\" && exit 0",
         "cz": "cz",
         "docs": "jsdoc -c jsdoc.json",
         "format": "npx prettier . --write",
