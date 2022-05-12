@@ -128,7 +128,6 @@ describe('Function `configGeographic` Testing', () => {
         (input) => {
             const testOutput = { ...data.defaultGeographicConfig }
             testOutput.aliases = input
-            console.log(input)
             expect(configGeographic({ boundaries: bounds, aliases: input })).toEqual(testOutput)
         }
     )

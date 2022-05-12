@@ -1,15 +1,15 @@
-const oparea = require('../../../index')
+const { validBoundaries } = require('../validation/validBoundaries')
 
 describe('Function `validBoundaries` Testing', () => {
     const badValues = [null, undefined, '', NaN, [1], 'some string']
     const defaultBoundariesValue = { west: -10, south: -20, east: 10, north: 20 }
 
     test('Proper formatting returns True: validBoundaries({ west: -10, south: -20, east: 10, north: 20})', () => {
-        expect(oparea.grids.validation.validBoundaries({ ...defaultBoundariesValue })).toBeTruthy()
+        expect(validBoundaries({ ...defaultBoundariesValue })).toBeTruthy()
     })
 
     test.each(badValues)('Invalid inputs return False: validBoundaries(%p)', (input) => {
-        expect(oparea.grids.validation.validBoundaries(input)).toBeFalsy()
+        expect(validBoundaries(input)).toBeFalsy()
     })
 
     test.each([
@@ -18,12 +18,12 @@ describe('Function `validBoundaries` Testing', () => {
         { west: -10, south: -20, north: 20 },
         { west: -10, south: -20, east: 10 }
     ])('Missing required property. Returns False: validBoundaries(%p)', (input) => {
-        expect(oparea.grids.validation.validBoundaries(input)).toBeFalsy()
+        expect(validBoundaries(input)).toBeFalsy()
     })
 
     test('Extra property not allowed. Returns False: validBoundaries({ west: -10, south: -20, east: 10, north: 20, extra: 10 })', () => {
         const testValue = { west: -10, south: -20, east: 10, north: 20, extra: 10 }
-        expect(oparea.grids.validation.validBoundaries(testValue)).toBeFalsy()
+        expect(validBoundaries(testValue)).toBeFalsy()
     })
 
     test.each(badValues)(
@@ -31,7 +31,7 @@ describe('Function `validBoundaries` Testing', () => {
         (input) => {
             const testValue = { ...defaultBoundariesValue }
             testValue.west = input
-            expect(oparea.grids.validation.validBoundaries(testValue)).toBeFalsy()
+            expect(validBoundaries(testValue)).toBeFalsy()
         }
     )
 
@@ -40,7 +40,7 @@ describe('Function `validBoundaries` Testing', () => {
         (input) => {
             const testValue = { ...defaultBoundariesValue }
             testValue.south = input
-            expect(oparea.grids.validation.validBoundaries(testValue)).toBeFalsy()
+            expect(validBoundaries(testValue)).toBeFalsy()
         }
     )
 
@@ -49,7 +49,7 @@ describe('Function `validBoundaries` Testing', () => {
         (input) => {
             const testValue = { ...defaultBoundariesValue }
             testValue.east = input
-            expect(oparea.grids.validation.validBoundaries(testValue)).toBeFalsy()
+            expect(validBoundaries(testValue)).toBeFalsy()
         }
     )
 
@@ -58,7 +58,7 @@ describe('Function `validBoundaries` Testing', () => {
         (input) => {
             const testValue = { ...defaultBoundariesValue }
             testValue.north = input
-            expect(oparea.grids.validation.validBoundaries(testValue)).toBeFalsy()
+            expect(validBoundaries(testValue)).toBeFalsy()
         }
     )
 
@@ -67,7 +67,7 @@ describe('Function `validBoundaries` Testing', () => {
         (input) => {
             const testValue = { ...defaultBoundariesValue }
             testValue.north = input
-            expect(oparea.grids.validation.validBoundaries(testValue)).toBeFalsy()
+            expect(validBoundaries(testValue)).toBeFalsy()
         }
     )
 
@@ -76,7 +76,7 @@ describe('Function `validBoundaries` Testing', () => {
         (input) => {
             const testValue = { ...defaultBoundariesValue }
             testValue.south = input
-            expect(oparea.grids.validation.validBoundaries(testValue)).toBeFalsy()
+            expect(validBoundaries(testValue)).toBeFalsy()
         }
     )
 
@@ -85,7 +85,7 @@ describe('Function `validBoundaries` Testing', () => {
         (input) => {
             const testValue = { ...defaultBoundariesValue }
             testValue.east = input
-            expect(oparea.grids.validation.validBoundaries(testValue)).toBeFalsy()
+            expect(validBoundaries(testValue)).toBeFalsy()
         }
     )
 
@@ -94,7 +94,7 @@ describe('Function `validBoundaries` Testing', () => {
         (input) => {
             const testValue = { ...defaultBoundariesValue }
             testValue.west = input
-            expect(oparea.grids.validation.validBoundaries(testValue)).toBeFalsy()
+            expect(validBoundaries(testValue)).toBeFalsy()
         }
     )
 
@@ -103,7 +103,7 @@ describe('Function `validBoundaries` Testing', () => {
         (input) => {
             const testValue = { ...defaultBoundariesValue }
             testValue.east = input
-            expect(oparea.grids.validation.validBoundaries(testValue)).toBeFalsy()
+            expect(validBoundaries(testValue)).toBeFalsy()
         }
     )
 
@@ -112,17 +112,17 @@ describe('Function `validBoundaries` Testing', () => {
         (input) => {
             const testValue = { ...defaultBoundariesValue }
             testValue.west = input
-            expect(oparea.grids.validation.validBoundaries(testValue)).toBeFalsy()
+            expect(validBoundaries(testValue)).toBeFalsy()
         }
     )
 
     test('North must be greater than south. Returns False: validBoundaries({ west: -10, south: 20, east: 10, north: -20 })', () => {
         const testValue = { west: -10, south: 20, east: 10, north: -20 }
-        expect(oparea.grids.validation.validBoundaries(testValue)).toBeFalsy()
+        expect(validBoundaries(testValue)).toBeFalsy()
     })
 
     test('North cannot equal south. Returns False: validBoundaries({ west: -10, south: 10, east: 10, north: 10 })', () => {
         const testValue = { west: -10, south: 10, east: 10, north: 10 }
-        expect(oparea.grids.validation.validBoundaries(testValue)).toBeFalsy()
+        expect(validBoundaries(testValue)).toBeFalsy()
     })
 })

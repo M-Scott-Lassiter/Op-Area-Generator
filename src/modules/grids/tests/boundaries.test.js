@@ -1,8 +1,12 @@
 const oparea = require('../../../index')
-// const data = require('./grids.testdata')
+const data = require('./grids.testdata')
 
 describe('Function `boundaries` Testing', () => {
     const badValues = [null, '', NaN, 200, -200, Infinity, -Infinity, 'Some string', { value: 2 }]
+
+    test('Calling function with no inputs returns default: boundaries() -> { west: -10, south: -20, east: 10, north: 20 }', () => {
+        expect(oparea.grids.config.boundaries()).toEqual(data.defaultBoundariesValue)
+    })
 
     test.each(badValues)(
         'Bad value for western boundary. Throws Error: boundaries(%p)',
@@ -61,14 +65,5 @@ describe('Function `boundaries` Testing', () => {
         expect(() => {
             oparea.grids.config.boundaries(-10, -20, 10, -21)
         }).toThrow()
-    })
-
-    test('Calling function with no inputs returns default: boundaries() -> { west: -10, south: -20, east: 10, north: 20 }', () => {
-        expect(oparea.grids.config.boundaries()).toEqual({
-            west: -10,
-            south: -20,
-            east: 10,
-            north: 20
-        })
     })
 })

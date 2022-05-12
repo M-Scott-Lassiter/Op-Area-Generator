@@ -3,6 +3,7 @@ const badValues = [null, '', NaN, Infinity, [15], '1', 10.1, -1, 'someStrings', 
 exports.knownBadValues = badValues
 exports.truthyValues = [true, 1, 'A', [1], { param: 'Test' }]
 exports.falsyValues = [false, 0, -0, '', null, undefined, NaN]
+exports.falsyValuesNoUndefined = [false, 0, -0, '', null, NaN] // Intentionally leaves off 'undefined' as this causes problems testing functions that have a default value assigned to it. 'undefined' can thus never get tested.
 
 exports.alias1 = { alias: 'MANTA', refersTo: ['A5'] }
 exports.alias2 = { alias: 'COFFEE', refersTo: ['BLACK', 'ALIEN', 'G22'] }

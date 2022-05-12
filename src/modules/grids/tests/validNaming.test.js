@@ -1,4 +1,4 @@
-const oparea = require('../../../index')
+const { validNaming } = require('../validation/validNaming')
 
 describe('Function `validNaming` Testing', () => {
     const defaultObject = {
@@ -12,11 +12,11 @@ describe('Function `validNaming` Testing', () => {
     const badValuesWithNumber = [...badValues, 2]
 
     test('Empty objects are allowed. Returns True: {}', () => {
-        expect(oparea.grids.validation.validNaming({})).toBeTruthy()
+        expect(validNaming({})).toBeTruthy()
     })
 
     test.each(badValuesWithNumber)('Known bad values return False: validNaming(%p)', (input) => {
-        expect(oparea.grids.validation.validNaming(input)).toBeFalsy()
+        expect(validNaming(input)).toBeFalsy()
     })
 
     // Only five keys may exist:
@@ -30,7 +30,7 @@ describe('Function `validNaming` Testing', () => {
         { dictionary: 'ABCD', numbersFirst: false, numberPadding: 0 },
         defaultObject
     ])('Object must contain any combination of allowed properties. Returns True: %p', (input) => {
-        expect(oparea.grids.validation.validNaming(input)).toBeTruthy()
+        expect(validNaming(input)).toBeTruthy()
     })
 
     test.each([
@@ -40,14 +40,14 @@ describe('Function `validNaming` Testing', () => {
         { numberPadding: 0, extra: false },
         { numericAxisOnHorizontal: false, extraProp: 0 }
     ])('Axis does not have additional foreign properties. Returns False: %p', (input) => {
-        expect(oparea.grids.validation.validNaming(input)).toBeFalsy()
+        expect(validNaming(input)).toBeFalsy()
     })
 
     test.each(badValuesWithNumber)(
         'allowLowerCaseLetters must be boolean. Returns False:{ allowLowerCaseLetters: %p }',
         (input) => {
             const testValue = { allowLowerCaseLetters: input }
-            expect(oparea.grids.validation.validNaming(testValue)).toBeFalsy()
+            expect(validNaming(testValue)).toBeFalsy()
         }
     )
 
@@ -55,7 +55,7 @@ describe('Function `validNaming` Testing', () => {
         'allowLowerCaseLetters must be boolean. Returns True:{ allowLowerCaseLetters: %p }',
         (input) => {
             const testValue = { allowLowerCaseLetters: input }
-            expect(oparea.grids.validation.validNaming(testValue)).toBeTruthy()
+            expect(validNaming(testValue)).toBeTruthy()
         }
     )
 
@@ -63,7 +63,7 @@ describe('Function `validNaming` Testing', () => {
         'numbersFirst must be boolean. Returns False:{ numbersFirst: %p }',
         (input) => {
             const testValue = { numbersFirst: input }
-            expect(oparea.grids.validation.validNaming(testValue)).toBeFalsy()
+            expect(validNaming(testValue)).toBeFalsy()
         }
     )
 
@@ -71,7 +71,7 @@ describe('Function `validNaming` Testing', () => {
         'numbersFirst must be boolean. Returns True:{ numbersFirst: %p }',
         (input) => {
             const testValue = { numbersFirst: input }
-            expect(oparea.grids.validation.validNaming(testValue)).toBeTruthy()
+            expect(validNaming(testValue)).toBeTruthy()
         }
     )
 
@@ -79,7 +79,7 @@ describe('Function `validNaming` Testing', () => {
         'numericAxisOnHorizontal must be boolean. Returns False:{ numericAxisOnHorizontal: %p }',
         (input) => {
             const testValue = { numericAxisOnHorizontal: input }
-            expect(oparea.grids.validation.validNaming(testValue)).toBeFalsy()
+            expect(validNaming(testValue)).toBeFalsy()
         }
     )
 
@@ -87,7 +87,7 @@ describe('Function `validNaming` Testing', () => {
         'numericAxisOnHorizontal must be boolean. Returns True:{ numericAxisOnHorizontal: %p }',
         (input) => {
             const testValue = { numericAxisOnHorizontal: input }
-            expect(oparea.grids.validation.validNaming(testValue)).toBeTruthy()
+            expect(validNaming(testValue)).toBeTruthy()
         }
     )
 
@@ -95,7 +95,7 @@ describe('Function `validNaming` Testing', () => {
         'numberPadding must be numeric. Returns False:{ numberPadding: %p }',
         (input) => {
             const testValue = { numberPadding: input }
-            expect(oparea.grids.validation.validNaming(testValue)).toBeFalsy()
+            expect(validNaming(testValue)).toBeFalsy()
         }
     )
 
@@ -103,7 +103,7 @@ describe('Function `validNaming` Testing', () => {
         'numberPadding must be between 0 and 10. Returns False:{ numberPadding: %p }',
         (input) => {
             const testValue = { numberPadding: input }
-            expect(oparea.grids.validation.validNaming(testValue)).toBeFalsy()
+            expect(validNaming(testValue)).toBeFalsy()
         }
     )
 
@@ -111,23 +111,23 @@ describe('Function `validNaming` Testing', () => {
         'numberPadding must be between 0 and 10. Returns True:{ numberPadding: %p }',
         (input) => {
             const testValue = { numberPadding: input }
-            expect(oparea.grids.validation.validNaming(testValue)).toBeTruthy()
+            expect(validNaming(testValue)).toBeTruthy()
         }
     )
 
     test(`Dictionary cannot have repeated letters. Returns False: { dictionary: 'ABCDA'}`, () => {
-        expect(oparea.grids.validation.validNaming({ dictionary: 'ABCDA' })).toBeFalsy()
+        expect(validNaming({ dictionary: 'ABCDA' })).toBeFalsy()
     })
 
     test(`Dictionary cannot have numbers. Returns False: { dictionary: 'ABC123' }`, () => {
-        expect(oparea.grids.validation.validNaming({ dictionary: 'ABC123' })).toBeFalsy()
+        expect(validNaming({ dictionary: 'ABC123' })).toBeFalsy()
     })
 
     test.each(['ABC', 'abc', 'AbCdEfG', 'PLKNA', 'ZYX'])(
         'Valid dictionary values. Returns True:{ dictionary: %p }',
         (input) => {
             const testValue = { dictionary: input }
-            expect(oparea.grids.validation.validNaming(testValue)).toBeTruthy()
+            expect(validNaming(testValue)).toBeTruthy()
         }
     )
 
@@ -135,7 +135,7 @@ describe('Function `validNaming` Testing', () => {
         'Invalid dictionary values. Returns False:{ dictionary: %p }',
         (input) => {
             const testValue = { dictionary: input }
-            expect(oparea.grids.validation.validNaming(testValue)).toBeFalsy()
+            expect(validNaming(testValue)).toBeFalsy()
         }
     )
 })
