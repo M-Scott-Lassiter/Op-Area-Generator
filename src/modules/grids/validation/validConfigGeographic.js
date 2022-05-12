@@ -40,8 +40,6 @@ function validConfigGeographic(geoConfigObjectToCheck) {
     if (
         !('boundaries' in geoConfigObjectToCheck) ||
         !validBoundaries(geoConfigObjectToCheck.boundaries)
-        // geoConfigObjectToCheck.boundaries.north - geoConfigObjectToCheck.boundaries.south < oneArcSecond ||
-        // geoConfigObjectToCheck.boundaries.east - geoConfigObjectToCheck.boundaries.west < oneArcSecond
     ) {
         return false
     }

@@ -3,7 +3,7 @@ const data = require('./grids.testdata')
 
 const bounds = data.defaultBoundariesValue
 
-describe('Function `validNaming` Testing', () => {
+describe('Function `validConfigGeographic` Testing', () => {
     test('Empty function call not allowed. Returns False: validConfigGeographic()', () => {
         expect(validConfigGeographic({})).toBeFalsy()
     })
