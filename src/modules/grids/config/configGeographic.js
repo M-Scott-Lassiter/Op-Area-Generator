@@ -1,5 +1,4 @@
 const { validConfigGeographic } = require('../validation/validConfigGeographic')
-// const { aliasCollection } = require('./aliasCollection')
 const { axisOptions } = require('./axisOptions')
 const { boundaries } = require('./boundaries')
 const { naming } = require('./naming')
@@ -11,7 +10,7 @@ const { naming } = require('./naming')
  *
  * @memberof Grids.Config
  * @param {object} [options] Optional additional parameters. If omitted, this function returns default
- * @param {       Grids.Definitions.Boundaries} boundaries Geographic grid boundaries. This property is required if options are included
+ * @param {       Grids.Definitions.Boundaries} options.boundaries Geographic grid boundaries. This property is required if options are included
  * @param {       Grids.Definitions.Naming} [options.naming] A grid naming configuration object
  * @param {       Grids.Definitions.AxisOptions} [options.longitudeAxis] Longitude axis configuration object
  * @param {       Grids.Definitions.AxisOptions} [options.latitudeAxis] Latitude axis configuration object
