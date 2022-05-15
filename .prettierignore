@@ -1,2 +1,4 @@
 # Documentation output
 out
+coverage
+node_modules
