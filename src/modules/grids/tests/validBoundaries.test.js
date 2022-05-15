@@ -125,4 +125,12 @@ describe('Function `validBoundaries` Testing', () => {
         const testValue = { west: -10, south: 10, east: 10, north: 10 }
         expect(validBoundaries(testValue)).toBeFalsy()
     })
+
+    test('Boundaries may cross the antimeridian. Returns True: validBoundaries({ west: -160, south: -20, east: 160, north: 20 })', () => {
+        expect(validBoundaries({ west: 160, south: -20, east: -160, north: 20 })).toBeTruthy()
+    })
+
+    test('Boundaries may span the whole globe. Returns True: validConfigGeographic({ boundaries: { west: -180, south: -20, east: 180, north: 20 } })', () => {
+        expect(validBoundaries({ west: -180, south: -20, east: 180, north: 20 })).toBeTruthy()
+    })
 })

@@ -87,6 +87,18 @@ describe('Function `validConfigGeographic` Testing', () => {
         expect(validConfigGeographic({ boundaries: bounds, extraProp: false })).toBeFalsy()
     })
 
+    test('Boundaries may cross the antimeridian. Returns True: validConfigGeographic({ boundaries: { west: 160, south: -20, east: -160, north: 20 } })', () => {
+        expect(
+            validConfigGeographic({ boundaries: { west: 160, south: -20, east: -160, north: 20 } })
+        ).toBeTruthy()
+    })
+
+    test('Boundaries may span the whole globe. Returns True: validConfigGeographic({ boundaries: { west: -180, south: -20, east: 180, north: 20 } })', () => {
+        expect(
+            validConfigGeographic({ boundaries: { west: -180, south: -20, east: 180, north: 20 } })
+        ).toBeTruthy()
+    })
+
     test('Minimum latitude spacing must be at least 1 arc second. Returns false: { boundaries: { north: 1, south: 0, east: 0, west: 10 }, latitudeAxis: { quantity: 10000 } }', () => {
         expect(
             validConfigGeographic({
